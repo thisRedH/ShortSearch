@@ -9,15 +9,17 @@
         "storage"
     ],
     "host_permissions": [
-        "https://bing.com/*",
-        "https://duckduckgo.com/*",
-        "https://ecosia.org/*",
-        "https://yandex.com/*",
-        "https://dogpile.com/*",
-        "https://scholar.google.com/*",
-        "https://*.wikipedia.org/*",
-        "https://github.com/*",
-        "https://stackoverflow.com/*"
+        "*://google.com/*",
+        "*://bing.com/*",
+        "*://duckduckgo.com/*",
+        "*://search.yahoo.com/*",
+        "*://ecosia.org/*",
+        "*://yandex.com/*",
+        "*://dogpile.com/*",
+        "*://scholar.google.com/*",
+        "*://*.wikipedia.org/*",
+        "*://github.com/*",
+        "*://stackoverflow.com/*"
     ],
     "optional_host_permissions": [
         "https://*/*",

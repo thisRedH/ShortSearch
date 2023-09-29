@@ -3,19 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Settings</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/options.css">
 </head>
 <body>
-    <form id="settings-form">
-        <div class="search-engines">
-            <div class="search-engines-container" id="search-engines-container">
-            </div>
-            <button type="button" id="search-engine-add">Add New Search Engine</button>
+    <form id="settings-form" method="post">
+        <div id="engines">
+            <table>
+                <thead>
+                    <tr>
+                        <td class="engine-number"></td>
+                        <td class="engine-name">Name</td>
+                        <td class="engine-url">URL</td>
+                    </tr>
+                </thead>
+                <tbody id="engies-container">
+                </tbody>
+            </table>
+            <button type="button" id="engine-add-button" onclick="addSearchEngine()">Add Search Enign</button>
+
+            <input type="submit">
+            <datalist id="engines-name-list">
+                <option value="Google">
+                <option value="Bing">
+                <option value="Yahoo">
+            </datalist>
+            <datalist id="engines-url-list">
+                <option value="http://google.com/search?q=%s">
+                <option value="http://bing.com/search?q=%s">
+                <option value="http://search.yahoo.com/search?p=%s">
+            </datalist>
         </div>
-        
-        <button type="submit">Save</button>
     </form>
     
     <script src="scripts/options.js"></script>

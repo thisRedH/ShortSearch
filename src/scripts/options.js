@@ -1,23 +1,20 @@
 
 function addSearchEngine() {
-    const maxCount = 15;
-    const container = document.getElementById("search-engines-container");
-    const searchEngines = container.getElementsByClassName("search-engine");
-    const count = searchEngines.length + 1;
+    const maxCount = 3;
+    const container = document.getElementById("engies-container");
+    const count = container.childElementCount + 1;
 
     if (count <= maxCount) {
-        const newLine = document.createElement("div");
-        newLine.className = "search-engine";
-        newLine.innerHTML = `
-            <div class="engine-number">${count}.</div>
-            <input type="text" class="engine-name" id="engine-name-${count}" name="engine-name-${count}" placeholder="Name" required>
-            <input type="url" class="engine-url" id="engine-url-${count}" name="engine-url-${count}" placeholder="https://foo.com/search?q=%s" required>
+        const newEngine = document.createElement("tr");
+        newEngine.className = "engine";
+        newEngine.innerHTML = `
+            <td class="engine-number">${count}.</td>
+            <td class="engine-name"><input name="engine-name-${count}" id="engine-name-${count}" list="engines-name-list" value=""></td>
+            <td class="engine-url"><input name="engine-url-${count}" id="engine-url-${count}" list="engines-url-list" value=""></td>
         `;
 
-        container.appendChild(newLine);
+        container.appendChild(newEngine);
     } else {
         alert(`You can only add a maximum of ${maxCount} search engines!`);
     }
 }
-
-document.getElementById("search-engine-add").addEventListener("click", addSearchEngine);
