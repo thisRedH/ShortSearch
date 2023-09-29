@@ -1,0 +1,57 @@
+{
+    "name": "ShortcutSearch",
+    "description": "Select text, press Shortcut, see the search results. Easy!",
+    "version": "0.0.1",
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "contextMenus",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://bing.com/*",
+        "https://duckduckgo.com/*",
+        "https://ecosia.org/*",
+        "https://yandex.com/*",
+        "https://dogpile.com/*",
+        "https://scholar.google.com/*",
+        "https://*.wikipedia.org/*",
+        "https://github.com/*",
+        "https://stackoverflow.com/*"
+    ],
+    "optional_host_permissions": [
+        "https://*/*",
+        "http://*/*",
+        "*://*/*"
+    ],
+    "options_page": "options.html",
+    "content_scripts": [
+        {
+            "js": [
+                "scripts/content/search.js"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ],
+    "background": {
+        "service_worker": "scripts/backround/service-worker.js"
+    },
+    "commands": {
+        "search_selected_txt_1": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+S",
+                "mac": "Command+Shift+S"
+            },
+            "description": "Search for the selected text"
+        },
+        "search_selected_txt_2": {
+            "description": "Search for the selected text, with your second search engine"
+        },
+        "search_selected_txt_3": {
+            "description": "Search for the selected text, with your third search engine"
+        }
+    },
+    "manifest_version": 3
+}
