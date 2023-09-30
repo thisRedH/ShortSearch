@@ -10,6 +10,25 @@ const IDT_ENGINE = "engine-id-";
 const IDT_ENGINE_NAME = "engine-name-";
 const IDT_ENGINE_URL = "engine-url-";
 
+function showError(msg) {
+    alert(msg);
+    console.log("ShortcutSearch: " + msg);
+}
+
+function arrayToStrAnd(arr) {
+    if (arr.length === 0) {
+        return '';
+    } else if (arr.length === 1) {
+        return arr[0].toString();
+    } else if (arr.length === 2) {
+        return `${arr[0]} and ${arr[1]}`;
+    } else {
+        const lastItem = arr.pop();
+        const joinedItems = arr.join(', ');
+        return `${joinedItems}, and ${lastItem}`;
+    }
+}
+
 function addSearchEngine(name = "", url = "") {
     const maxCount = 3;
     const container = document.getElementById("engines-container");
@@ -31,14 +50,17 @@ function addSearchEngine(name = "", url = "") {
     }
 }
 
-var searchEngineOnPos = [];
 
-document.getElementById("settings-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-
+async function saveSettingsForm() {
     let formData = new FormData(document.getElementById("settings-form"));
-    var searchEnginesInput = {};
+
+    var enginesList = new Array();
+    var enginesNoSpecial = new Array();
+
+    var iterEngines = 0;
+
     for (let pair of formData.entries()) {
+        // IDT_ENGINE_NAME
         if (pair[0].startsWith(IDT_ENGINE_NAME)) {
             const engineIDNumber = LAST_NUMBER.exec(pair[0])[1];
 
@@ -46,17 +68,48 @@ document.getElementById("settings-form").addEventListener("submit", (e) => {
             const urlData = formData.get(IDT_ENGINE_URL + engineIDNumber);
 
             if (!urlData.includes(SPECIAL_QUERY_PLACEHOLDER)) {
-                alert(
-                    `Search Engine number ${document.querySelector(`#${IDT_ENGINE}${engineIDNumber} > td.engine-number`).innerText} does not have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nIt will not work as expected!`
-                )
+                enginesNoSpecial.push(iterEngines + 1);
             }
 
             let engine = {
                 name: nameData,
                 url: urlData,
             };
+            enginesList.push(engine);
+
+            iterEngines += 1;
+        // IDT_ENGINE_URL
+        } else if (pair[0].startsWith(IDT_ENGINE_URL)) {
+            // Handlet with IDT_ENGINE_NAME
+            continue;
         }
     }
-    console.log(formData);
-    console.log(Object.fromEntries(formData));
+
+    try {
+        await chrome.storage.sync.set({enginesList});
+    } catch (error) {
+        await chrome.storage.local.set({enginesList});
+    }
+
+    // Errors
+    if (enginesNoSpecial.length) {
+        var msg = `Search Engine ${enginesNoSpecial} dosn't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nIt will not work as expected!`
+        if (enginesNoSpecial.length > 1) {
+            var msg = `Search Engine's ${arrayToStrAnd(enginesNoSpecial)} don't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nThey will not work as expected!`
+        }
+
+        showError(msg);
+    }
+
+}
+
+// --- addEventListener's ---
+
+document.getElementById("engine-add-button").addEventListener("click", () => {
+    addSearchEngine();
+});
+
+document.getElementById("settings-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    saveSettingsForm();
 });
