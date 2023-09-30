@@ -10,9 +10,9 @@ const IDT_ENGINE = "engine-id-";
 const IDT_ENGINE_NAME = "engine-name-";
 const IDT_ENGINE_URL = "engine-url-";
 
-function showError(msg) {
-    alert(msg);
-    console.log("ShortcutSearch: " + msg);
+function showError(msg, err = new Error(null)) {
+    alert(`${msg}\n${err}`);
+    console.warn("ShortcutSearch: ", msg, '\n', err);
 }
 
 function arrayToStrAnd(arr) {
@@ -50,7 +50,6 @@ function addSearchEngine(name = "", url = "") {
     }
 }
 
-
 async function saveSettingsForm() {
     let formData = new FormData(document.getElementById("settings-form"));
 
@@ -86,9 +85,13 @@ async function saveSettingsForm() {
     }
 
     try {
-        await chrome.storage.sync.set({enginesList});
+        let settingsData = {enginesList};
+        await chrome.storage.local.set(settingsData);
+        if (true) {     //TODO: Setting to turn os sync storage
+            await chrome.storage.sync.set(settingsData);
+        }
     } catch (error) {
-        await chrome.storage.local.set({enginesList});
+        showError("Could not save settings", error);
     }
 
     // Errors
@@ -103,7 +106,16 @@ async function saveSettingsForm() {
 
 }
 
+async function loadSettings() {
+    settings = await chrome.storage.sync.get(null);
+    for (let engine of settings.enginesList) {
+        addSearchEngine(engine.name, engine.url);
+    }
+}
+
 // --- addEventListener's ---
+
+addEventListener("DOMContentLoaded", loadSettings);
 
 document.getElementById("engine-add-button").addEventListener("click", () => {
     addSearchEngine();
