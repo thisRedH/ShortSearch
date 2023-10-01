@@ -72,6 +72,8 @@ function moveUpSearchEngine(id) {
     
     if(engine.previousElementSibling)
         engine.parentNode.insertBefore(engine, engine.previousElementSibling);
+    
+    fixNumbersSearchEngins();
 }
 
 function moveDownSearchEngine(id) {
@@ -79,6 +81,19 @@ function moveDownSearchEngine(id) {
 
     if(engine.nextElementSibling)
         engine.parentNode.insertBefore(engine.nextElementSibling, engine);
+    
+    fixNumbersSearchEngins();
+}
+
+function fixNumbersSearchEngins() {
+    const container = document.getElementById("engines-container");
+    const children = container.children;
+
+    for (let i = 0; i < children.length; i++) {
+        let engine = children[i];
+        let numberObj = engine.querySelector("td.engine-number > span");
+        numberObj.innerHTML = i;
+    }
 }
 
 async function saveSettingsForm() {
