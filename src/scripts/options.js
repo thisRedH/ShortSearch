@@ -73,7 +73,7 @@ function moveUpSearchEngine(id) {
     if(engine.previousElementSibling)
         engine.parentNode.insertBefore(engine, engine.previousElementSibling);
     
-    fixNumbersSearchEngins();
+    reorderSearchEngins();
 }
 
 function moveDownSearchEngine(id) {
@@ -82,10 +82,10 @@ function moveDownSearchEngine(id) {
     if(engine.nextElementSibling)
         engine.parentNode.insertBefore(engine.nextElementSibling, engine);
     
-    fixNumbersSearchEngins();
+    reorderSearchEngins();
 }
 
-function fixNumbersSearchEngins() {
+function reorderSearchEngins() {
     const container = document.getElementById("engines-container");
     const children = container.children;
 
