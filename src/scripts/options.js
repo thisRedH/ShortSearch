@@ -12,8 +12,8 @@ const IDT_ENGINE_URL = "engine-url-";
 const IDT_ENGINE_REMOVE = "engine-remove-";
 
 function showError(msg, err = new Error(null)) {
-    alert(`${msg}\n${err}`);
     console.warn("ShortcutSearch: ", msg, '\n', err);
+    alert(`${msg}\n${err}`);
 }
 
 function arrayToStrAnd(arr) {
@@ -40,7 +40,7 @@ function addSearchEngine(name = "", url = "") {
         newEngine.className = "engine";
         newEngine.id = IDT_ENGINE + count;
         newEngine.innerHTML = `
-            <td class="engine-number">${count}.</td>
+            <td class="engine-number"><span>${count}</span>.</td>
             <td class="engine-name"><input name="engine-name-${count}" id="${IDT_ENGINE_NAME}${count}" list="engines-name-list" value="${name}"></td>
             <td class="engine-url"><input name="engine-url-${count}" id="${IDT_ENGINE_URL}${count}" list="engines-url-list" value="${url}"></td>
             <td class="engine-remove"><a href="#" name="engine-remove-${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button" sizes="10"></a></td>
@@ -59,9 +59,27 @@ function addSearchEngine(name = "", url = "") {
 }
 
 function removeSearchEngine(id) {
+    const container = document.getElementById("engines-container");
+    const count = container.count();
+    
+    if (count <= 1) return;
+    
     document.getElementById(id).remove();
 }
 
+function moveUpSearchEngine(id) {
+    const engine = document.getElementById(id);
+    
+    if(engine.previousElementSibling)
+        engine.parentNode.insertBefore(engine, engine.previousElementSibling);
+}
+
+function moveDownSearchEngine(id) {
+    const engine = document.getElementById(id);
+
+    if(engine.nextElementSibling)
+        engine.parentNode.insertBefore(engine.nextElementSibling, engine);
+}
 
 async function saveSettingsForm() {
     let formData = new FormData(document.getElementById("settings-form"));
