@@ -144,11 +144,11 @@ function addSearchEngine(name = "", url = "") {
 }
 
 function removeSearchEngine(id) {
-    const container = document.getElementById("engines-container");
-    const count = container.count;
+    if (document.getElementById("engines-container").childElementCount <= 1) {
+        showError("You Need at least 1 engine!");
+        return;
+    }
 
-    if (count <= 1) return;
-    
     document.getElementById(id).remove();
 
     reorderSearchEngins();
@@ -188,6 +188,7 @@ async function saveSettingsForm() {
 
     var enginesList = new Array();
     var enginesNoSpecial = new Array();
+    var enginesEmpty = new Array();
 
     var iterEngines = 0;
 
@@ -199,17 +200,19 @@ async function saveSettingsForm() {
             const nameData = pair[1];
             const urlData = formData.get(IDT_ENGINE_URL + engineIDNumber);
 
-            if (!urlData.includes(SPECIAL_QUERY_PLACEHOLDER)) {
-                enginesNoSpecial.push(iterEngines + 1);
-            }
-
             let engine = {
                 name: nameData,
                 url: urlData,
             };
             enginesList.push(engine);
 
-            iterEngines += 1;
+            if (!urlData) {
+                enginesEmpty.push(iterEngines);
+            } else if (!urlData.includes(SPECIAL_QUERY_PLACEHOLDER)) {
+                enginesNoSpecial.push(iterEngines);
+            }
+
+            iterEngines++;
         // IDT_ENGINE_URL
         } else if (pair[0].startsWith(IDT_ENGINE_URL)) {
             // Handlet with IDT_ENGINE_NAME
@@ -217,6 +220,7 @@ async function saveSettingsForm() {
         }
     }
 
+    // Save to Chrome
     try {
         let settingsData = {enginesList};
         await chrome.storage.sync.set(settingsData);
@@ -225,6 +229,14 @@ async function saveSettingsForm() {
     }
 
     // Errors
+    if (enginesEmpty.length) {
+        var msg = `Search Engine ${enginesEmpty} dosn't have an URL.\nIt will not work!`
+        if (enginesEmpty.length > 1) {
+            var msg = `Search Engine's ${arrayToStrAnd(enginesEmpty)} don't have a URL.\nThey will not work!`
+        }
+
+        showError(msg);
+    }
     if (enginesNoSpecial.length) {
         var msg = `Search Engine ${enginesNoSpecial} dosn't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nIt will not work as expected!`
         if (enginesNoSpecial.length > 1) {
