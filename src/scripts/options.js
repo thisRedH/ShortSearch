@@ -96,7 +96,7 @@ function addSearchEngine(name = "", url = "") {
     const container = document.getElementById("engines-container");
     const count = container.childElementCount;
 
-    if (count > maxCount) {
+    if (count >= maxCount) {
         alert(`You can only add a maximum of ${maxCount} search engines!`);
         return;
     }
