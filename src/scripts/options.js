@@ -30,11 +30,11 @@ function arrayToStrAnd(arr) {
 }
 
 function addSearchEngine(name = "", url = "") {
-    const maxCount = 3;
+    const maxCount = 10;
     const container = document.getElementById("engines-container");
-    const count = container.childElementCount + 1;
+    const count = container.childElementCount;
 
-    if (count <= maxCount) {
+    if (count < maxCount) {
         const newEngine = document.createElement("tr");
         newEngine.className = "engine";
         newEngine.id = IDT_ENGINE + count;
@@ -86,10 +86,7 @@ async function saveSettingsForm() {
 
     try {
         let settingsData = {enginesList};
-        await chrome.storage.local.set(settingsData);
-        if (true) {     //TODO: Setting to turn os sync storage
-            await chrome.storage.sync.set(settingsData);
-        }
+        await chrome.storage.sync.set(settingsData);
     } catch (error) {
         showError("Could not save settings", error);
     }
