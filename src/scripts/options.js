@@ -10,6 +10,8 @@ const IDT_ENGINE = "engine-id-";
 const IDT_ENGINE_NAME = "engine-name-";
 const IDT_ENGINE_URL = "engine-url-";
 const IDT_ENGINE_REMOVE = "engine-remove-";
+const IDT_ENGINE_MOVE_UP = "engine-move-up-";
+const IDT_ENGINE_MOVE_DOWN = "engine-move-down-";
 
 function showError(msg, err = new Error(null)) {
     console.warn("ShortcutSearch: ", msg, '\n', err);
@@ -43,7 +45,9 @@ function addSearchEngine(name = "", url = "") {
             <td class="engine-number"><span>${count}</span>.</td>
             <td class="engine-name"><input name="engine-name-${count}" id="${IDT_ENGINE_NAME}${count}" list="engines-name-list" value="${name}"></td>
             <td class="engine-url"><input name="engine-url-${count}" id="${IDT_ENGINE_URL}${count}" list="engines-url-list" value="${url}"></td>
-            <td class="engine-remove"><a href="#" name="engine-remove-${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button" sizes="10"></a></td>
+            <td class="engine-remove"><a href="#" name="engine-remove-${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button"></a></td>
+            <td class="engine-move-up"><a href="#" name="engine-move-up-${count}" id="${IDT_ENGINE_MOVE_UP}${count}"><img src="./assets/arrow_up.svg" alt="Arrow Up Button"></a></td>
+            <td class="engine-move-down"><a href="#" name="engine-move-down-${count}" id="${IDT_ENGINE_MOVE_DOWN}${count}"><img src="./assets/arrow_down.svg" alt="Arrow Down Button"></a></td>
         `;
         
         container.appendChild(newEngine);
@@ -53,6 +57,16 @@ function addSearchEngine(name = "", url = "") {
             removeSearchEngine(`${IDT_ENGINE}${count}`);
         });
 
+        document.getElementById(`${IDT_ENGINE_MOVE_UP}${count}`).addEventListener("click", (e) => {
+            e.preventDefault();
+            moveUpSearchEngine(`${IDT_ENGINE}${count}`);
+        });
+
+        document.getElementById(`${IDT_ENGINE_MOVE_DOWN}${count}`).addEventListener("click", (e) => {
+            e.preventDefault();
+            moveDownSearchEngine(`${IDT_ENGINE}${count}`);
+        });
+
     } else {
         alert(`You can only add a maximum of ${maxCount} search engines!`);
     }
@@ -60,8 +74,8 @@ function addSearchEngine(name = "", url = "") {
 
 function removeSearchEngine(id) {
     const container = document.getElementById("engines-container");
-    const count = container.count();
-    
+    const count = container.count;
+
     if (count <= 1) return;
     
     document.getElementById(id).remove();
