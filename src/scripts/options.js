@@ -111,6 +111,15 @@ function addSearchEngine(name = "", url = "") {
         
         container.appendChild(newEngine);
 
+        // Automatic url when name found in ENGINES_DATALIST_DICT
+        document.getElementById(`${IDT_ENGINE_NAME}${count}`).addEventListener("input", (e) => {
+            url = ENGINES_DATALIST_DICT[e.target.value];
+            if (url) {
+                document.getElementById(`${IDT_ENGINE_URL}${count}`)
+                .value = url;
+            }
+        });
+
         document.getElementById(`${IDT_ENGINE_REMOVE}${count}`).addEventListener("click", (e) => {
             e.preventDefault();
             removeSearchEngine(`${IDT_ENGINE}${count}`);
