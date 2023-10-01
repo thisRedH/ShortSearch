@@ -96,48 +96,51 @@ function addSearchEngine(name = "", url = "") {
     const container = document.getElementById("engines-container");
     const count = container.childElementCount;
 
-    if (count < maxCount) {
-        const newEngine = document.createElement("tr");
-        newEngine.className = "engine";
-        newEngine.id = IDT_ENGINE + count;
-        newEngine.innerHTML = `
-            <td class="engine-number"><span>${count}</span>.</td>
-            <td class="engine-name"><input name="engine-name-${count}" id="${IDT_ENGINE_NAME}${count}" list="engines-name-list" value="${name}"></td>
-            <td class="engine-url"><input name="engine-url-${count}" id="${IDT_ENGINE_URL}${count}" list="engines-url-list" value="${url}"></td>
-            <td class="engine-remove"><a href="#" name="engine-remove-${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button"></a></td>
-            <td class="engine-move-up"><a href="#" name="engine-move-up-${count}" id="${IDT_ENGINE_MOVE_UP}${count}"><img src="./assets/arrow_up.svg" alt="Arrow Up Button"></a></td>
-            <td class="engine-move-down"><a href="#" name="engine-move-down-${count}" id="${IDT_ENGINE_MOVE_DOWN}${count}"><img src="./assets/arrow_down.svg" alt="Arrow Down Button"></a></td>
-        `;
-        
-        container.appendChild(newEngine);
-
-        // Automatic url when name found in ENGINES_DATALIST_DICT
-        document.getElementById(`${IDT_ENGINE_NAME}${count}`).addEventListener("input", (e) => {
-            url = ENGINES_DATALIST_DICT[e.target.value];
-            if (url) {
-                document.getElementById(`${IDT_ENGINE_URL}${count}`)
-                .value = url;
-            }
-        });
-
-        document.getElementById(`${IDT_ENGINE_REMOVE}${count}`).addEventListener("click", (e) => {
-            e.preventDefault();
-            removeSearchEngine(`${IDT_ENGINE}${count}`);
-        });
-
-        document.getElementById(`${IDT_ENGINE_MOVE_UP}${count}`).addEventListener("click", (e) => {
-            e.preventDefault();
-            moveUpSearchEngine(`${IDT_ENGINE}${count}`);
-        });
-
-        document.getElementById(`${IDT_ENGINE_MOVE_DOWN}${count}`).addEventListener("click", (e) => {
-            e.preventDefault();
-            moveDownSearchEngine(`${IDT_ENGINE}${count}`);
-        });
-
-    } else {
+    if (count > maxCount) {
         alert(`You can only add a maximum of ${maxCount} search engines!`);
+        return;
     }
+
+    const newEngine = document.createElement("tr");
+    newEngine.className = "engine";
+    newEngine.id = IDT_ENGINE + count;
+    newEngine.innerHTML = `
+        <td class="engine-number"><span>${count}</span>.</td>
+        <td class="engine-name"><input name="engine-name-${count}" id="${IDT_ENGINE_NAME}${count}" list="engines-name-list" value="${name}"></td>
+        <td class="engine-url"><input name="engine-url-${count}" id="${IDT_ENGINE_URL}${count}" list="engines-url-list" value="${url}"></td>
+        <td class="engine-remove"><a href="#" name="engine-remove-${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button"></a></td>
+        <td class="engine-move-up"><a href="#" name="engine-move-up-${count}" id="${IDT_ENGINE_MOVE_UP}${count}"><img src="./assets/arrow_up.svg" alt="Arrow Up Button"></a></td>
+        <td class="engine-move-down"><a href="#" name="engine-move-down-${count}" id="${IDT_ENGINE_MOVE_DOWN}${count}"><img src="./assets/arrow_down.svg" alt="Arrow Down Button"></a></td>
+    `;
+    
+    container.appendChild(newEngine);
+
+    // Automatic url when name found in ENGINES_DATALIST_DICT
+    document.getElementById(`${IDT_ENGINE_NAME}${count}`).addEventListener("input", (e) => {
+        url = ENGINES_DATALIST_DICT[e.target.value];
+        if (url) {
+            document.getElementById(`${IDT_ENGINE_URL}${count}`)
+            .value = url;
+        }
+    });
+
+    // removeSearchEngine
+    document.getElementById(`${IDT_ENGINE_REMOVE}${count}`).addEventListener("click", (e) => {
+        e.preventDefault();
+        removeSearchEngine(`${IDT_ENGINE}${count}`);
+    });
+
+    // moveUpSearchEngine
+    document.getElementById(`${IDT_ENGINE_MOVE_UP}${count}`).addEventListener("click", (e) => {
+        e.preventDefault();
+        moveUpSearchEngine(`${IDT_ENGINE}${count}`);
+    });
+
+    // moveDownSearchEngine
+    document.getElementById(`${IDT_ENGINE_MOVE_DOWN}${count}`).addEventListener("click", (e) => {
+        e.preventDefault();
+        moveDownSearchEngine(`${IDT_ENGINE}${count}`);
+    });
 }
 
 function removeSearchEngine(id) {
