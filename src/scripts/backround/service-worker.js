@@ -7,17 +7,16 @@ chrome.commands.onCommand.addListener(async (command, tab) => {
         try {
             const engineNumber = LAST_NUMBER.exec(command)[1];
             const enginesList = ((await chrome.storage.sync.get("enginesList")).enginesList);
-            var engine = "http://google.com/search?q=%s";
-            try {
-                engine = enginesList[engineNumber];
-            } catch (error) {
+            var engine = enginesList[engineNumber];
+
+            if (!engine) {
                 console.warn(`Engine ${engineNumber} does not exist! Using fallback engine 0`);
                 engine = enginesList[0];
             }
-            
-            if (!typeof engine === 'string' || !engine instanceof String) {
-                console.warn(`Engine could not be loaded. Using google.com instead`);
-                engine = "http://google.com/search?q=%s";
+
+            if (!engine) {
+                console.error("Engine could not be loaded. Using google.com instead");
+                engine = {"name": "Google", "url": "http://google.com/search?q=%s"};
             }
 
             await chrome.tabs.sendMessage(tab.id, {
