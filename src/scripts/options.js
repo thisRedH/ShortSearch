@@ -9,6 +9,7 @@ const LAST_NUMBER = /(\d+)(?!.*\d)/
 const IDT_ENGINE = "engine-id-";
 const IDT_ENGINE_NAME = "engine-name-";
 const IDT_ENGINE_URL = "engine-url-";
+const IDT_ENGINE_REMOVE = "engine-remove-";
 
 function showError(msg, err = new Error(null)) {
     alert(`${msg}\n${err}`);
@@ -42,13 +43,24 @@ function addSearchEngine(name = "", url = "") {
             <td class="engine-number">${count}.</td>
             <td class="engine-name"><input name="engine-name-${count}" id="${IDT_ENGINE_NAME}${count}" list="engines-name-list" value="${name}"></td>
             <td class="engine-url"><input name="engine-url-${count}" id="${IDT_ENGINE_URL}${count}" list="engines-url-list" value="${url}"></td>
+            <td class="engine-remove"><a href="#" name="engine-remove-${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button" sizes="10"></a></td>
         `;
-
+        
         container.appendChild(newEngine);
+
+        document.getElementById(`${IDT_ENGINE_REMOVE}${count}`).addEventListener("click", () => {
+            removeSearchEngine(`${IDT_ENGINE}${count}`);
+        });
+
     } else {
         alert(`You can only add a maximum of ${maxCount} search engines!`);
     }
 }
+
+function removeSearchEngine(id) {
+    document.getElementById(id).remove();
+}
+
 
 async function saveSettingsForm() {
     let formData = new FormData(document.getElementById("settings-form"));
