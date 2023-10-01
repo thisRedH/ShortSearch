@@ -108,9 +108,9 @@ function addSearchEngine(name = "", url = "") {
         <td class="engine-number"><span>${count}</span>.</td>
         <td class="engine-name"><input name="engine-name-${count}" id="${IDT_ENGINE_NAME}${count}" list="engines-name-list" value="${name}"></td>
         <td class="engine-url"><input name="engine-url-${count}" id="${IDT_ENGINE_URL}${count}" list="engines-url-list" value="${url}"></td>
-        <td class="engine-remove"><a href="#" name="engine-remove-${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button"></a></td>
-        <td class="engine-move-up"><a href="#" name="engine-move-up-${count}" id="${IDT_ENGINE_MOVE_UP}${count}"><img src="./assets/arrow_up.svg" alt="Arrow Up Button"></a></td>
-        <td class="engine-move-down"><a href="#" name="engine-move-down-${count}" id="${IDT_ENGINE_MOVE_DOWN}${count}"><img src="./assets/arrow_down.svg" alt="Arrow Down Button"></a></td>
+        <td class="engine-remove"><a href="javascript:void(0)" name="engine-remove-${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button"></a></td>
+        <td class="engine-move-up"><a href="javascript:void(0)" name="engine-move-up-${count}" id="${IDT_ENGINE_MOVE_UP}${count}"><img src="./assets/arrow_up.svg" alt="Arrow Up Button"></a></td>
+        <td class="engine-move-down"><a href="javascript:void(0)" name="engine-move-down-${count}" id="${IDT_ENGINE_MOVE_DOWN}${count}"><img src="./assets/arrow_down.svg" alt="Arrow Down Button"></a></td>
     `;
     
     container.appendChild(newEngine);
