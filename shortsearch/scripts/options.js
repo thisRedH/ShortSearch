@@ -73,7 +73,7 @@ const ENGINES_DATALIST_DICT = {
 }
 
 function showError(msg, err = new Error(null)) {
-    console.warn("ShortcutSearch: ", msg, '\n', err);
+    console.warn("ShortSearch: ", msg, '\n', err);
     alert(`${msg}\n${err}`);
 }
 

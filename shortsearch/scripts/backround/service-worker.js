@@ -24,7 +24,7 @@ chrome.commands.onCommand.addListener(async (command, tab) => {
                 searchURL: engine.url,
             });
         } catch(err) {
-            console.warn("ShortcutSearch:", err.message);
+            console.warn("ShortSearch:", err.message);
         }
     }
 });

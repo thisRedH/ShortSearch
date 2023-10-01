@@ -1,5 +1,5 @@
 {
-    "name": "ShortcutSearch",
+    "name": "ShortSearch",
     "description": "Select text, press Shortcut, see the search results. Easy!",
     "version": "0.0.1",
     "permissions": [
