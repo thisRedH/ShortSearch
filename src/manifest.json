@@ -9,21 +9,6 @@
         "storage"
     ],
     "host_permissions": [
-        "*://google.com/*",
-        "*://bing.com/*",
-        "*://duckduckgo.com/*",
-        "*://search.yahoo.com/*",
-        "*://ecosia.org/*",
-        "*://yandex.com/*",
-        "*://dogpile.com/*",
-        "*://scholar.google.com/*",
-        "*://*.wikipedia.org/*",
-        "*://github.com/*",
-        "*://stackoverflow.com/*"
-    ],
-    "optional_host_permissions": [
-        "https://*/*",
-        "http://*/*",
         "*://*/*"
     ],
     "options_page": "options.html",
