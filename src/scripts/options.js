@@ -13,6 +13,12 @@ const IDT_ENGINE_REMOVE = "engine-remove-";
 const IDT_ENGINE_MOVE_UP = "engine-move-up-";
 const IDT_ENGINE_MOVE_DOWN = "engine-move-down-";
 
+const ENGINES_DATALIST_DICT = {
+    "Google": "http://google.com/search?q=%s",
+    "Bing": "http://bing.com/search?q=%s",
+    "Yahoo": "http://search.yahoo.com/search?p=%s",
+};
+
 function showError(msg, err = new Error(null)) {
     console.warn("ShortcutSearch: ", msg, '\n', err);
     alert(`${msg}\n${err}`);
@@ -172,9 +178,25 @@ async function loadSettings() {
     }
 }
 
+function populateDatalist(id, options) {
+    const datalist = document.getElementById(id);
+
+    for(let option of options) {
+        const newOption = document.createElement("option");
+        newOption.value = option;
+
+        datalist.appendChild(newOption);
+    }
+}
+
+function populateEngineDatalists(enginesDict) {
+    populateDatalist("engines-name-list", Object.keys(enginesDict));
+    populateDatalist("engines-url-list", Object.values(enginesDict));
+}
 
 addEventListener("DOMContentLoaded", () => {
     loadSettings();
+    populateEngineDatalists(ENGINES_DATALIST_DICT);
 
     document.getElementById("engine-add-button").addEventListener("click", () => {
         addSearchEngine();

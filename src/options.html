@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="styles/options.css">
 </head>
 <body>
+    <noscript>
+        <h2>Your browser does not support JavaScript or has it turned off!</h2>
+        <h3>It will not work without it!</h3>
+    </noscript>
+
     <form id="settings-form">
         <div id="engines">
             <table>
@@ -19,20 +24,17 @@
                     </tr>
                 </thead>
                 <tbody id="engines-container">
+                    <!--Populatet by options.js-->
                 </tbody>
             </table>
 
             <button type="button" id="engine-add-button">Add Search Engine</button>
             
             <datalist id="engines-name-list">
-                <option value="Google">
-                <option value="Bing">
-                <option value="Yahoo">
+                <!--Populatet by options.js-->
             </datalist>
             <datalist id="engines-url-list">
-                <option value="http://google.com/search?q=%s">
-                <option value="http://bing.com/search?q=%s">
-                <option value="http://search.yahoo.com/search?p=%s">
+                <!--Populatet by options.js-->
             </datalist>
         </div>
         <input type="submit" value="Save">
