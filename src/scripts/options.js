@@ -125,3 +125,8 @@ document.getElementById("settings-form").addEventListener("submit", async (e) =>
     e.preventDefault();
     saveSettingsForm();
 });
+
+document.getElementById("open-chrome-shortcuts").addEventListener("click", (e) => {
+    e.preventDefault();
+    chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+});

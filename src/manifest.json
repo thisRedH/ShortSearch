@@ -41,11 +41,14 @@
         "service_worker": "scripts/backround/service-worker.js"
     },
     "commands": {
-        "search_selected_txt_1": {
+        "search_selected_txt_0": {
             "suggested_key": {
                 "default": "Ctrl+Shift+S",
                 "mac": "Command+Shift+S"
             },
+            "description": "Search with Engine 0"
+        },
+        "search_selected_txt_1": {
             "description": "Search with Engine 1"
         },
         "search_selected_txt_2": {
@@ -71,9 +74,6 @@
         },
         "search_selected_txt_9": {
             "description": "Search with Engine 9"
-        },
-        "search_selected_txt_10": {
-            "description": "Search with Engine 10"
         }
     },
     "manifest_version": 3
