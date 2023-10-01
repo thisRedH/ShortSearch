@@ -249,9 +249,14 @@ async function saveSettingsForm() {
 }
 
 async function loadSettings() {
-    settings = await chrome.storage.sync.get(null);
-    for (let engine of settings.enginesList) {
-        addSearchEngine(engine.name, engine.url);
+    var settings = await chrome.storage.sync.get(null);
+    if (settings.enginesList && settings.enginesList.length > 0) {
+        for (let engine of settings.enginesList) {
+            addSearchEngine(engine.name, engine.url);
+        }        
+    } else {
+        addSearchEngine("Google", "http://google.com/search?q=%s");
+        saveSettingsForm();
     }
 }
 
