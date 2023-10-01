@@ -79,6 +79,8 @@ function removeSearchEngine(id) {
     if (count <= 1) return;
     
     document.getElementById(id).remove();
+
+    reorderSearchEngins();
 }
 
 function moveUpSearchEngine(id) {
