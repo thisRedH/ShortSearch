@@ -46,13 +46,34 @@
                 "default": "Ctrl+Shift+S",
                 "mac": "Command+Shift+S"
             },
-            "description": "Search for the selected text"
+            "description": "Search with Engine 1"
         },
         "search_selected_txt_2": {
-            "description": "Search for the selected text, with your second search engine"
+            "description": "Search with Engine 2"
         },
         "search_selected_txt_3": {
-            "description": "Search for the selected text, with your third search engine"
+            "description": "Search with Engine 3"
+        },
+        "search_selected_txt_4": {
+            "description": "Search with Engine 4"
+        },
+        "search_selected_txt_5": {
+            "description": "Search with Engine 5"
+        },
+        "search_selected_txt_6": {
+            "description": "Search with Engine 6"
+        },
+        "search_selected_txt_7": {
+            "description": "Search with Engine 7"
+        },
+        "search_selected_txt_8": {
+            "description": "Search with Engine 8"
+        },
+        "search_selected_txt_9": {
+            "description": "Search with Engine 9"
+        },
+        "search_selected_txt_10": {
+            "description": "Search with Engine 10"
         }
     },
     "manifest_version": 3
