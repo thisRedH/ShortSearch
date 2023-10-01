@@ -172,20 +172,21 @@ async function loadSettings() {
     }
 }
 
-// --- addEventListener's ---
 
-addEventListener("DOMContentLoaded", loadSettings);
+addEventListener("DOMContentLoaded", () => {
+    loadSettings();
 
-document.getElementById("engine-add-button").addEventListener("click", () => {
-    addSearchEngine();
-});
-
-document.getElementById("settings-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    saveSettingsForm();
-});
-
-document.getElementById("open-chrome-shortcuts").addEventListener("click", (e) => {
-    e.preventDefault();
-    chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+    document.getElementById("engine-add-button").addEventListener("click", () => {
+        addSearchEngine();
+    });
+    
+    document.getElementById("settings-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        saveSettingsForm();
+    });
+    
+    document.getElementById("open-chrome-shortcuts").addEventListener("click", (e) => {
+        e.preventDefault();
+        chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+    });
 });
