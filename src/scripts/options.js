@@ -48,7 +48,8 @@ function addSearchEngine(name = "", url = "") {
         
         container.appendChild(newEngine);
 
-        document.getElementById(`${IDT_ENGINE_REMOVE}${count}`).addEventListener("click", () => {
+        document.getElementById(`${IDT_ENGINE_REMOVE}${count}`).addEventListener("click", (e) => {
+            e.preventDefault();
             removeSearchEngine(`${IDT_ENGINE}${count}`);
         });
 
