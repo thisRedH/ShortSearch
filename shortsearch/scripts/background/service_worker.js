@@ -1,5 +1,5 @@
 
-const LAST_NUMBER = /(\d+)(?!.*\d)/
+importScripts("../common/misc.js");
 
 chrome.commands.onCommand.addListener(async (command, tab) => {
     if (command.startsWith("search_selected_txt")) {
@@ -10,12 +10,12 @@ chrome.commands.onCommand.addListener(async (command, tab) => {
             var engine = enginesList[engineNumber];
 
             if (!engine) {
-                console.warn(`Engine ${engineNumber} does not exist! Using fallback engine 0`);
+                showWarn(`Engine ${engineNumber} does not exist! Using fallback engine 0`);
                 engine = enginesList[0];
             }
 
             if (!engine) {
-                console.error("Engine could not be loaded. Using google.com instead");
+                showError("Search engine could not be loaded. Using google.com instead");
                 engine = {"name": "Google", "url": "http://google.com/search?q=%s"};
             }
 
@@ -24,7 +24,7 @@ chrome.commands.onCommand.addListener(async (command, tab) => {
                 searchURL: engine.url,
             });
         } catch(err) {
-            console.warn("ShortSearch:", err.message);
+            showError(err.message);
         }
     }
 });

@@ -1,9 +1,5 @@
 
-// Global "Settings"
 var SPECIAL_QUERY_PLACEHOLDER = "%s";
-
-// Regex
-const LAST_NUMBER = /(\d+)(?!.*\d)/
 
 // ID Templates
 const IDT_ENGINE = "engine-id-";
@@ -12,84 +8,6 @@ const IDT_ENGINE_URL = "engine-url-";
 const IDT_ENGINE_REMOVE = "engine-remove-";
 const IDT_ENGINE_MOVE_UP = "engine-move-up-";
 const IDT_ENGINE_MOVE_DOWN = "engine-move-down-";
-
-const ENGINES_DATALIST_DICT = {
-    // General Search engines
-    "Google": "http://google.com/search?q=%s",
-    "Bing": "http://bing.com/search?q=%s",
-    "Yahoo": "http://search.yahoo.com/search?p=%s",
-    "DuckDuckGo": "http://duckduckgo.com/?q=%s",
-    "Ecosia": "https://www.ecosia.org/search?q=%s",
-    "Startpage": "https://www.startpage.com/do/dsearch?query=%s",
-    "Baidu": "http://baidu.com/s?wd=%s",
-    "Yandex": "http://yandex.com/search/?text=%s",
-    "Ask.com": "http://ask.com/web?q=%s",
-    "AOL Search": "http://search.aol.com/aol/search?q=%s",
-    "Excite": "http://results.excite.com/serp?q=%s",
-    "All the Internet": "http://alltheinternet.com/?q=%s",
-    "Lycos": "http://search.lycos.com/web/?q=%s",
-    "Dogpile": "http://dogpile.com/search/web?q=%s",
-    "Swisscows": "http://swisscows.com/web?query=%s",
-    "Mojeek": "http://mojeek.com/search?q=%s",
-    "Naver": "http://search.naver.com/search.naver?query=%s",
-    "Seznam": "http://search.seznam.cz/?q=%s",
-    "Qwant": "http://qwant.com/?q=%s",
-    
-    // Encyclopedia
-    "Wikipedia": "http://wikipedia.org/wiki/%s",
-    "Citizendium": "http://citizendium.org/wiki/%s",
-    "encyclopedia": "http://encyclopedia.com/gsearch?q=%s",
-    
-    // TV
-    "TMDB": "http://themoviedb.org/search?query=%s",
-    "IMDb": "http://imdb.com/find/?q=c",
-    
-    // Social Media
-    "Youtube": "http://youtube.com/results?search_query=%s",
-    "Reddit": "http://reddit.com/search/?q=%s",
-    "Twitter": "http://twitter.com/search?q=%s",
-    "X": "http://x.com/search?q=%s",
-    "Facebook": "http://facebook.com/search/?q=%s",
-    "TikTok": "http://tiktok.com/search?q=%s",
-    "Pinterest": "http://pinterest.com/search/?q=%s",
-    
-    // Shops
-    "Amazon": "http://amazon.com/s?k=%s",
-    "Facebook Marketplace": "http://facebook.com/marketplace/search/?query=%s",
-
-    // PC/Coding Stuff
-    "Github": "http://github.com/search?q=%s",
-    "Stack Overflow": "http://stackoverflow.com/search?q=%s",
-    "Stack Exchange": "http://stackexchange.com/search?q=%s",
-    "PCPartPicker": "http://pcpartpicker.com/search/?q=%s",
-    "Geizhals": "http://geizhals.de/?fs=%s",
-    
-    // Game Stuff
-    "Steam": "http://steampowered.com/search/?term=%s",
-    "GOG": "http://gog.com/games?query=%s",
-    
-    // Special
-    "The Pirate Bay": "http://thepiratebay10.org/search/%s",
-}
-
-function showError(msg, err = new Error(null)) {
-    console.warn("ShortSearch: ", msg, '\n', err);
-    alert(`${msg}\n${err}`);
-}
-
-function arrayToStrAnd(arr) {
-    if (arr.length === 0) {
-        return '';
-    } else if (arr.length === 1) {
-        return arr[0].toString();
-    } else if (arr.length === 2) {
-        return `${arr[0]} and ${arr[1]}`;
-    } else {
-        const lastItem = arr.pop();
-        const joinedItems = arr.join(', ');
-        return `${joinedItems}, and ${lastItem}`;
-    }
-}
 
 function addSearchEngine(name = "", url = "") {
     const maxCount = 10;
@@ -117,7 +35,7 @@ function addSearchEngine(name = "", url = "") {
 
     // Automatic url when name found in ENGINES_DATALIST_DICT
     document.getElementById(`${IDT_ENGINE_NAME}${count}`).addEventListener("input", (e) => {
-        url = ENGINES_DATALIST_DICT[e.target.value];
+        url = ENGINES_DATALIST[e.target.value];
         if (url) {
             document.getElementById(`${IDT_ENGINE_URL}${count}`)
             .value = url;
@@ -186,18 +104,18 @@ function reorderSearchEngins() {
 async function saveSettingsForm() {
     let formData = new FormData(document.getElementById("settings-form"));
 
-    var enginesList = new Array();
-    var enginesNoSpecial = new Array();
-    var enginesEmpty = new Array();
+    var enginesList = [];
+    var enginesNoSpecial = [];
+    var enginesEmpty = [];
 
     var iterEngines = 0;
 
-    for (let pair of formData.entries()) {
+    for (let [id, value] of formData.entries()) {
         // IDT_ENGINE_NAME
-        if (pair[0].startsWith(IDT_ENGINE_NAME)) {
-            const engineIDNumber = LAST_NUMBER.exec(pair[0])[1];
+        if (id.startsWith(IDT_ENGINE_NAME)) {
+            const engineIDNumber = LAST_NUMBER.exec(id)[1];
 
-            const nameData = pair[1];
+            const nameData = value;
             const urlData = formData.get(IDT_ENGINE_URL + engineIDNumber);
 
             let engine = {
@@ -214,7 +132,7 @@ async function saveSettingsForm() {
 
             iterEngines++;
         // IDT_ENGINE_URL
-        } else if (pair[0].startsWith(IDT_ENGINE_URL)) {
+        } else if (id.startsWith(IDT_ENGINE_URL)) {
             // Handlet with IDT_ENGINE_NAME
             continue;
         }
@@ -222,8 +140,7 @@ async function saveSettingsForm() {
 
     // Save to Chrome
     try {
-        let settingsData = {enginesList};
-        await chrome.storage.sync.set(settingsData);
+        await saveSettings({enginesList});
     } catch (error) {
         showError("Could not save settings", error);
     }
@@ -232,7 +149,7 @@ async function saveSettingsForm() {
     if (enginesEmpty.length) {
         var msg = `Search Engine ${enginesEmpty} dosn't have an URL.\nIt will not work!`
         if (enginesEmpty.length > 1) {
-            var msg = `Search Engine's ${arrayToStrAnd(enginesEmpty)} don't have a URL.\nThey will not work!`
+            var msg = `Search Engine's ${beautifyArray(enginesEmpty)} don't have a URL.\nThey will not work!`
         }
 
         showError(msg);
@@ -240,7 +157,7 @@ async function saveSettingsForm() {
     if (enginesNoSpecial.length) {
         var msg = `Search Engine ${enginesNoSpecial} dosn't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nIt will not work as expected!`
         if (enginesNoSpecial.length > 1) {
-            var msg = `Search Engine's ${arrayToStrAnd(enginesNoSpecial)} don't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nThey will not work as expected!`
+            var msg = `Search Engine's ${beautifyArray(enginesNoSpecial)} don't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nThey will not work as expected!`
         }
 
         showError(msg);
@@ -248,37 +165,17 @@ async function saveSettingsForm() {
 
 }
 
-async function loadSettings() {
-    var settings = await chrome.storage.sync.get(null);
-    if (settings.enginesList && settings.enginesList.length > 0) {
-        for (let engine of settings.enginesList) {
-            addSearchEngine(engine.name, engine.url);
-        }        
-    } else {
-        addSearchEngine("Google", "http://google.com/search?q=%s");
-        saveSettingsForm();
+function displaySettings(settings) {
+    for (const engine of settings.enginesList) {
+        addSearchEngine(engine.name, engine.url);
     }
-}
-
-function populateDatalist(id, options) {
-    const datalist = document.getElementById(id);
-
-    for(let option of options) {
-        const newOption = document.createElement("option");
-        newOption.value = option;
-
-        datalist.appendChild(newOption);
-    }
-}
-
-function populateEngineDatalists(enginesDict) {
-    populateDatalist("engines-name-list", Object.keys(enginesDict));
-    populateDatalist("engines-url-list", Object.values(enginesDict));
 }
 
 addEventListener("DOMContentLoaded", () => {
-    loadSettings();
-    populateEngineDatalists(ENGINES_DATALIST_DICT);
+    loadSettings(DEFAULT_SETTINGS).then(displaySettings);
+    populateDatalist(document.getElementById("engines-name-list"), Object.keys(ENGINES_DATALIST));
+    populateDatalist(document.getElementById("engines-url-list"), Object.values(ENGINES_DATALIST));
+
 
     document.getElementById("engine-add-button").addEventListener("click", () => {
         addSearchEngine();

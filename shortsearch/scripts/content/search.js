@@ -1,11 +1,11 @@
 
-function searchSelectedText(engine, placeholderStr = "%s") {
+function searchSelectedText(url, placeholderStr = "%s") {
     const selectedText = window.getSelection().toString().trim();
     
     if (selectedText) {
         var searchUrl = "";
         try {
-            searchUrl = engine.replace(
+            searchUrl = url.replace(
                 placeholderStr,
                 encodeURIComponent(selectedText)
             );
