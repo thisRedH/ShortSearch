@@ -23,7 +23,7 @@
         }
     ],
     "background": {
-        "service_worker": "scripts/backround/service-worker.js"
+        "service_worker": "scripts/background/service_worker.js"
     },
     "commands": {
         "search_selected_txt_0": {
