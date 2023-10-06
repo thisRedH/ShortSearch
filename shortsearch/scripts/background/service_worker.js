@@ -22,6 +22,7 @@ chrome.commands.onCommand.addListener(async (command, tab) => {
             await chrome.tabs.sendMessage(tab.id, {
                 event: "search_selected_txt",
                 searchURL: engine.url,
+                urlAutoEval: "loose"    //TODO: load from save + implement in options
             });
         } catch(err) {
             showError(err.message);
