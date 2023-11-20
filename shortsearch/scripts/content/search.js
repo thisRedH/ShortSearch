@@ -1,75 +1,49 @@
 
-function searchText(url, text, placeholderStr, encoding = "URIC") {
-    const encodingFunc = (() => {
-        switch (encoding) {
-            case "NONE":
-                return (s) => { return s; };
-            case "URI":
-                return encodeURI;
-            case "URIC":
-                return encodeURIComponent;
-            case "B64":
-                return btoa;
-            case "HEX":
-                return (s) => {
-                    return s.split("")
-                        .map(c => c.charCodeAt(0).toString(16).padStart(2, "0"))
-                        .join("");
-                };
-            default:
-                return encodeURIComponent;
-        }
-    })();
-
-    window.open(
-        normalizeURL(url.replace(placeholderStr, encodingFunc(text))),
-        "_blank",
-        "noreferrer"
-    );
-}
-
 function normalizeURL(url) {
     const pattern = /^((([a-z]*):)?\/{2})?|\/{2}/i;
     return "//" + url.replace(pattern, "");
 }
 
 // from https://stackoverflow.com/a/5717133/22279121
-// changed https?: to ((https|http|ftp|file)?:)?
-// removed {port and path}{query string}{fragment locator}
-function validURL(str) {
-    const pattern = new RegExp(
-        '^(((https|http|ftp|file)?:)?\\/\\/)?'+ // protocol
-        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-        '((\\d{1,3}\\.){3}\\d{1,3}))'); // OR ip (v4) address
-    return !!pattern.test(str);
-}
+// changed to fit my needs
+const VALIDATE_URL = new RegExp(
+    '^(((https|http|ftp|file)?:)?\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' // OR ip (v4) address
+);
+
+// Same as VALIDATE_URL, but protocol detection is enforced
+const VALIDATE_URL_STRICT = new RegExp(
+    '^((https|http|ftp|file):\/\/)'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' // OR ip (v4) address
+);
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.event === "search_selected_txt") {
-        const selectedText = window.getSelection().toString().trim();
-        if (!selectedText) { return; }
+if (message.event === "search_sel") {
+    const selectedText = window.getSelection().toString().trim();
+    if (!selectedText) { return; }
 
-        var url = message.searchURL;
-        var queryText = selectedText;
-        if (message.urlAutoEval) {
-            try {
-                url = (new URL(selectedText)).origin;
-                queryText = "";
-            } catch {
-                if (message.urlAutoEval === "loose" && validURL(selectedText)) {
-                    url = selectedText;
-                    queryText = "";
-                }
-            }
-        }
+    const urlPattern = message.urlAutoEval === "loose"
+        ? VALIDATE_URL
+        : VALIDATE_URL_STRICT;
 
-        searchText(
-            url,
-            queryText,
-            "%s",
-            "URIC"
+    if (!!message.urlAutoEval && urlPattern.test(selectedText)) {
+        // selectedText is a url, now open it
+        window.open(
+            normalizeURL(selectedText),
+            message.windowTarget
+        );
+    } else {
+        window.open(
+            normalizeURL(message.engineURL.replace(
+                    message.engineURLPlaceholder,
+                    encodeURIComponent(selectedText)
+                )
+            ),
+            message.windowTarget
         );
     }
-});
+}});
 
-//TODO: Popup when selected
+//TODO: Popup [Search button] when selected
