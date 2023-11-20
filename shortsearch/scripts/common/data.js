@@ -59,16 +59,15 @@ const ENGINES_DATALIST = {
     "GOG":          "http://gog.com/games?query=%s",
 
     // Special
-    "The Pirate Bay": "http://thepiratebay10.org/search/%s",
+    "The Pirate Bay":   "http://thepiratebay10.org/search/%s",
 }
 
 const DEFAULT_SETTINGS = {
     "enginesList": [
-        {"name": "Google", "url": ENGINES_DATALIST["Google"]},
-        {"name": "DuckDuckGo", "url": ENGINES_DATALIST["DuckDuckGo"]},
-        {"name": "Youtube", "url": ENGINES_DATALIST["Youtube"]},
-        {"name": "Wikipedia", "url": ENGINES_DATALIST["Wikipedia"]},
-        {"name": "Stack Overflow", "url": ENGINES_DATALIST["Stack Overflow"]},
+        {"name": "Google",          "url": ENGINES_DATALIST["Google"]},
+        {"name": "DuckDuckGo",      "url": ENGINES_DATALIST["DuckDuckGo"]},
+        {"name": "Youtube",         "url": ENGINES_DATALIST["Youtube"]},
+        {"name": "Wikipedia",       "url": ENGINES_DATALIST["Wikipedia"]},
+        {"name": "Stack Overflow",  "url": ENGINES_DATALIST["Stack Overflow"]},
     ]
 }
-
