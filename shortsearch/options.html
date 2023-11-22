@@ -9,13 +9,13 @@
 </head>
 <body>
     <noscript>
-        <h2>Your browser does not support JavaScript or has it turned off!</h2>
-        <h3>It will not work without it!</h3>
+        No Javascript
     </noscript>
 
     <p>
         <!--redirect happens in script!-->
-        To set shortcut's please visit <a href="chrome://extensions/shortcuts" id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
+        To set shortcut's please visit
+        <a id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
     </p>
 
     <form id="settings-form">
@@ -49,6 +49,6 @@
     
     <script src="scripts/common/misc.js"></script>
     <script src="scripts/common/data.js"></script>
-    <script src="scripts/options.js"></script>
+    <script defer src="scripts/options.js"></script>
 </body>
 </html>

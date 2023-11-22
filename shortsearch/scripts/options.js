@@ -162,7 +162,6 @@ async function saveSettingsForm() {
 
         showError(msg);
     }
-
 }
 
 function displaySettings(settings) {
@@ -180,14 +179,24 @@ addEventListener("DOMContentLoaded", () => {
     document.getElementById("engine-add-button").addEventListener("click", () => {
         addSearchEngine();
     });
-    
+
     document.getElementById("settings-form").addEventListener("submit", async (e) => {
         e.preventDefault();
         saveSettingsForm();
     });
-    
-    document.getElementById("open-chrome-shortcuts").addEventListener("click", (e) => {
+
+    document.getElementById("open-chrome-shortcuts").addEventListener("mousedown", (e) => {
         e.preventDefault();
-        chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+        console.log(e);
+        if (e.button === 0) {                   // 0 = Main button (left)
+            chrome.tabs.update({
+                url: "chrome://extensions/shortcuts"
+            });
+        } else if (e.button === 1) {            // 1 = Auxiliary button (middle)
+            chrome.tabs.create({
+                url: "chrome://extensions/shortcuts",
+                active: false
+            });
+        }
     });
 });

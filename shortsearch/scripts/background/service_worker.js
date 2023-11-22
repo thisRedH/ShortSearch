@@ -26,7 +26,7 @@ if (command.startsWith("search_selected_txt")) {
             windowTarget: "_blank",     //TODO: load from save + implement in options
             engineURLPlaceholder: "%s"  //TODO: load from save + implement in options
         });
-    } catch(err) {
+    } catch(err) { try {
         showError(err.message);
-    }
+    } catch(e) { ()=>{}; }}
 }});

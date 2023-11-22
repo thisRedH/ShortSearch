@@ -1,1 +1,10 @@
 
+a, .link {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
+a:hover, .link:hover {
+    text-decoration: underline dashed;
+}
