@@ -50,6 +50,7 @@ const ENGINES_DATALIST = {
     // PC/Coding Stuff
     "Stack Overflow":   "http://stackoverflow.com/search?q=%s",
     "Stack Exchange":   "http://stackexchange.com/search?q=%s",
+    "DevDocs":      "http://devdocs.io/#q=%s",
     "Github":       "http://github.com/search?q=%s",
     "PCPartPicker": "http://pcpartpicker.com/search/?q=%s",
     "Geizhals":     "http://geizhals.de/?fs=%s",
