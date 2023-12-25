@@ -14,7 +14,7 @@ if (command.startsWith("search_selected_txt")) {
             engine = enginesList[0];
         }
 
-        if (!engine) {
+        if (!engine) {                          //TODO: Use error screen (make error.html)
             showError("Search engine could not be loaded. Using google.com instead");
             engine = {"name": "Google", "url": "http://google.com/search?q=%s"};
         }
@@ -22,9 +22,9 @@ if (command.startsWith("search_selected_txt")) {
         await chrome.tabs.sendMessage(tab.id, {
             event: "search_sel",
             engineURL: engine.url,
-            urlAutoEval: "loose",       //TODO: load from save + implement in options
-            windowTarget: "_blank",     //TODO: load from save + implement in options
-            engineURLPlaceholder: "%s"  //TODO: load from save + implement in options
+            urlAutoEval: "loose",               //TODO: load from save + implement in options
+            windowTarget: "_blank",             //TODO: load from save + implement in options
+            engineURLPlaceholder: "%s"          //TODO: load from save + implement in options
         });
     } catch(err) { try {
         showError(err.message);
