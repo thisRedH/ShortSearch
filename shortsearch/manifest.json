@@ -2,6 +2,12 @@
     "name": "ShortSearch",
     "description": "Select text, press Shortcut, see the search results. Easy!",
     "version": "0.0.1",
+    "icons": {
+        "16": "icon16.png",
+        "32": "icon32.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
     "permissions": [
         "tabs",
         "activeTab",
