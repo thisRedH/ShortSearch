@@ -12,12 +12,6 @@
         No Javascript
     </noscript>
 
-    <p>
-        <!--redirect happens in script!-->
-        To set shortcut's please visit
-        <a id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
-    </p>
-
     <form id="settings-form">
         <div id="engines">
             <table>
@@ -42,6 +36,42 @@
                 <!--Populatet by options.js-->
             </datalist>
         </div>
+
+        <p>
+            <!--redirect happens in script!-->
+            To set shortcut's please visit
+            <a id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
+        </p>
+
+        <details>
+            <summary>Advanced</summary>
+
+            <div>
+                <!--TODO: enginePlaceholder-->
+                <label for="engine-placeholder">Placeholder in URL</label>
+                <input id="engine-placeholder" type="text">
+            </div>
+
+            <div>
+                <!--TODO: evalMode-->
+                <label for="eval-mode">Link auto evaluation Engine</label>
+                <select name="eval-mode" id="eval-mode">
+                    <option value="loose">Generous</option>
+                    <option value="strict">Strict</option>
+                    <option value="off">Off</option>
+                </select>
+            </div>
+
+            <div>
+                <!--TODO: windowTarget-->
+                <label for="window-target">Open in</label>
+                <select name="window-target" id="window-target">
+                    <option value="_blank">New Tab</option>
+                    <option value="_self">Same Tab</option>
+                </select>
+            </div>
+        </details>
+
         <input type="submit" value="Save">
     </form>
 

@@ -24,11 +24,12 @@ if (message.event === "search_sel") {
     const selectedText = window.getSelection().toString().trim();
     if (!selectedText) { return; }
 
-    const urlPattern = message.urlAutoEval === "loose"
+    //TODO: add off
+    const urlPattern = message.evalMode === "loose"
         ? VALIDATE_URL
         : VALIDATE_URL_STRICT;
 
-    if (!!message.urlAutoEval && urlPattern.test(selectedText)) {
+    if (!!message.evalMode && urlPattern.test(selectedText)) {
         // selectedText is a url, now open it
         window.open(
             normalizeURL(selectedText),
@@ -37,7 +38,7 @@ if (message.event === "search_sel") {
     } else {
         window.open(
             normalizeURL(message.engineURL.replace(
-                    message.engineURLPlaceholder,
+                    message.enginePlaceholder,
                     encodeURIComponent(selectedText)
                 )
             ),

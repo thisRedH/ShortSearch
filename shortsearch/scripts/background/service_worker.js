@@ -22,9 +22,9 @@ if (command.startsWith("search_selected_txt")) {
         await chrome.tabs.sendMessage(tab.id, {
             event: "search_sel",
             engineURL: engine.url,
-            urlAutoEval: "loose",               //TODO: load from save + implement in options
-            windowTarget: "_blank",             //TODO: load from save + implement in options
-            engineURLPlaceholder: "%s"          //TODO: load from save + implement in options
+            enginePlaceholder: "%s",            //TODO: load from save + implement in options
+            evalMode: "loose",                  //TODO: load from save + implement in options
+            windowTarget: "_blank"              //TODO: load from save + implement in options
         });
     } catch(err) { try {
         showError(err.message);
