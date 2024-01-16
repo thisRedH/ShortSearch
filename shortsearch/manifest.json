@@ -19,7 +19,8 @@
             ],
             "matches": [
                 "*://*/*"
-            ]
+            ],
+            "all_frames": true
         }
     ],
     "background": {
