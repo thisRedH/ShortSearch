@@ -26,6 +26,10 @@ a:hover, .link:hover {
     text-decoration: underline dashed;
 }
 
+input, select {
+    color: black;
+}
+
 button, input[type="submit"], input[type="reset"] {
     color: black;
 }
@@ -49,7 +53,7 @@ td {
     display: block;
     min-width: 530px;
     max-width: 1100px;
-    margin: 15px;
+    margin: 0 auto;
     margin-top: 0;
 }
 
