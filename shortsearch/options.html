@@ -12,71 +12,81 @@
         No Javascript
     </noscript>
 
-    <form id="settings-form">
-        <div id="engines">
-            <table>
-                <thead>
-                    <tr>
-                        <td class="engine-number"></td>
-                        <td class="engine-name">Name</td>
-                        <td class="engine-url">URL</td>
-                    </tr>
-                </thead>
-                <tbody id="engines-container">
-                    <!--Populatet by options.js-->
-                </tbody>
-            </table>
+    <p class="info-text" id="warning-not-finished">This extension is not finished. Stuff will break!</p>
 
-            <button type="button" id="engine-add-button">Add Search Engine</button>
-            
-            <datalist id="engines-name-list">
-                <!--Populatet by options.js-->
-            </datalist>
-            <datalist id="engines-url-list">
-                <!--Populatet by options.js-->
-            </datalist>
+    <div id="main">
+        <div id="settings-card">
+            <form id="settings-form">
+                <h2>Settings</h2>
+                <div id="engines">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="engine-number"></td>
+                                <td class="engine-name">Name</td>
+                                <td class="engine-url">URL</td>
+                            </tr>
+                        </thead>
+                        <tbody id="engines-container">
+                            <!--Populatet by options.js-->
+                        </tbody>
+                    </table>
+
+                    <button type="button" id="engine-add-button">Add Search Engine</button>
+                    
+                    <datalist id="engines-name-list">
+                        <!--Populatet by options.js-->
+                    </datalist>
+                    <datalist id="engines-url-list">
+                        <!--Populatet by options.js-->
+                    </datalist>
+                </div>
+
+                <p class="info-text">
+                    <!--redirect happens in script!-->
+                    To set shortcut's please visit
+                    <a id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
+                </p>
+
+                <details>
+                    <summary>Advanced</summary>
+
+                    <div>
+                        <!--TODO: enginePlaceholder-->
+                        <label for="engine-placeholder">Placeholder in URL</label>
+                        <input id="engine-placeholder" type="text">
+                    </div>
+
+                    <div>
+                        <!--TODO: evalMode-->
+                        <label for="eval-mode">Link auto evaluation Engine</label>
+                        <select name="eval-mode" id="eval-mode">
+                            <option value="loose">Generous</option>
+                            <option value="strict">Strict</option>
+                            <option value="off">Off</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <!--TODO: windowTarget-->
+                        <label for="window-target">Open in</label>
+                        <select name="window-target" id="window-target">
+                            <option value="_blank">New Tab</option>
+                            <option value="_self">Same Tab</option>
+                        </select>
+                    </div>
+                </details>
+
+                <input type="submit" value="Save">
+                <!--TODO: Add reset-->
+            </form>
         </div>
+        
+        <footer>
+            2023 © thisRedH under MIT
+        </footer>
+    </div>
 
-        <p>
-            <!--redirect happens in script!-->
-            To set shortcut's please visit
-            <a id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
-        </p>
-
-        <details>
-            <summary>Advanced</summary>
-
-            <div>
-                <!--TODO: enginePlaceholder-->
-                <label for="engine-placeholder">Placeholder in URL</label>
-                <input id="engine-placeholder" type="text">
-            </div>
-
-            <div>
-                <!--TODO: evalMode-->
-                <label for="eval-mode">Link auto evaluation Engine</label>
-                <select name="eval-mode" id="eval-mode">
-                    <option value="loose">Generous</option>
-                    <option value="strict">Strict</option>
-                    <option value="off">Off</option>
-                </select>
-            </div>
-
-            <div>
-                <!--TODO: windowTarget-->
-                <label for="window-target">Open in</label>
-                <select name="window-target" id="window-target">
-                    <option value="_blank">New Tab</option>
-                    <option value="_self">Same Tab</option>
-                </select>
-            </div>
-        </details>
-
-        <input type="submit" value="Save">
-    </form>
-
-    <p>Note: This extension is not finished. Stuff will break</p>
-    
     <script src="scripts/common/misc.js"></script>
     <script src="scripts/common/data.js"></script>
     <script defer src="scripts/options.js"></script>

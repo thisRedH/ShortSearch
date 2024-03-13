@@ -1,10 +1,69 @@
 
+* {
+    color: white;
+    font-size: 1rem;
+    font-style: normal;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #000000;
+}
+
+footer {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
 a, .link {
     cursor: pointer;
     text-decoration: underline;
-    color: blue;
+    color: rgb(97, 97, 255);
 }
 
 a:hover, .link:hover {
     text-decoration: underline dashed;
+}
+
+button, input[type="submit"], input[type="reset"] {
+    color: black;
+}
+
+td {
+    text-align: center;
+}
+
+.info-text {
+    font-size: 0.8rem;
+    opacity: 75%;
+    text-align: center;
+}
+
+#warning-not-finished {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+#main {
+    display: block;
+    min-width: 530px;
+    max-width: 1100px;
+    margin: 15px;
+    margin-top: 0;
+}
+
+#settings-card {
+    display: flex;
+    justify-content: center;
+
+    background-color: #222222;
+    border-radius: 25px;
+    padding-top: 20px;
+    padding-bottom: 25px;
+}
+
+#settings-form > h2 {
+    font-size: 1.55rem;
+    text-align: center;
 }
