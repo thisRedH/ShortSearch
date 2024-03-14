@@ -18,6 +18,13 @@
         <div id="settings-card">
             <form id="settings-form">
                 <h2>Settings</h2>
+
+                <p class="info-text">
+                    <!--redirect happens in script!-->
+                    To set shortcut's please visit
+                    <a id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
+                </p>
+
                 <div id="engines">
                     <table>
                         <thead>
@@ -32,7 +39,9 @@
                         </tbody>
                     </table>
 
-                    <button type="button" id="engine-add-button">Add Search Engine</button>
+                    <div class="justifyed-wrapper">
+                        <button type="button" id="engine-add-button">Add Search Engine</button>
+                    </div>
                     
                     <datalist id="engines-name-list">
                         <!--Populatet by options.js-->
@@ -42,11 +51,14 @@
                     </datalist>
                 </div>
 
-                <p class="info-text">
-                    <!--redirect happens in script!-->
-                    To set shortcut's please visit
-                    <a id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
-                </p>
+                <div>
+                    <!--TODO: windowTarget-->
+                    <label for="window-target">Open in</label>
+                    <select name="window-target" id="window-target">
+                        <option value="_blank">New Tab</option>
+                        <option value="_self">Same Tab</option>
+                    </select>
+                </div>
 
                 <details>
                     <summary>Advanced</summary>
@@ -66,18 +78,11 @@
                             <option value="off">Off</option>
                         </select>
                     </div>
-
-                    <div>
-                        <!--TODO: windowTarget-->
-                        <label for="window-target">Open in</label>
-                        <select name="window-target" id="window-target">
-                            <option value="_blank">New Tab</option>
-                            <option value="_self">Same Tab</option>
-                        </select>
-                    </div>
                 </details>
 
-                <input type="submit" value="Save">
+                <div class="justifyed-wrapper">
+                    <input type="submit" value="Save">
+                </div>
                 <!--TODO: Add reset-->
             </form>
         </div>
