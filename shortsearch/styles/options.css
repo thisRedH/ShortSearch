@@ -28,6 +28,10 @@
     border-style: solid;
 }
 
+#engine-placeholder {
+    text-align: right;
+}
+
 img[src="./assets/arrow_up.svg"], img[src="./assets/arrow_down.svg"], img[src="./assets/x.svg"] {
     filter: invert(1);
 }
