@@ -1,6 +1,79 @@
 
+:root {
+    --main-bg1-color: #000;
+    --main-bg2-color: #222;
+    --main-text-color: whitesmoke;
+    --main-text-link-color: #6161FF;
+    --main-accent-bg-color: #555;
+    --main-accent-text-color: whitesmoke;
+}
+
 * {
+    color: var(--main-text-color);
+    font-size: 1rem;
+    font-style: normal;
     font-family: "Montserrat", sans-serif;
+
     margin: 0px;
     padding: 0px;
+}
+
+body {
+    background-color: var(--main-bg1-color);
+}
+
+footer {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+a, .link {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--main-text-link-color);
+}
+
+a:hover, .link:hover {
+    text-decoration: underline dashed;
+}
+
+label {
+    vertical-align: middle;
+}
+
+option {
+    background-color: var(--main-accent-bg-color);
+    color: var(--main-accent-text-color);
+}
+
+button, input, select {
+    background-color: var(--main-accent-bg-color);
+    color: var(--main-accent-text-color);
+    font-family: sans-serif;
+
+    height: 30px;
+    box-sizing: border-box;
+    margin: 2px;
+    border-style: none;
+    border-radius: 10px;
+    padding: 5px;
+    transition: box-shadow .3s, scale .2s;
+}
+
+button, input[type="submit"], input[type="reset"] {
+    margin: 6px 2px;
+}
+
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+    box-shadow: 0 2px 5px #000;
+    scale: 1.04;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    text-align: center;
 }

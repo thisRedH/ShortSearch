@@ -1,71 +1,7 @@
 
-* {
-    color: whitesmoke;
-    font-size: 1rem;
-    font-style: normal;
-    font-family: sans-serif;
-}
-
-body {
-    background-color: #000000;
-}
-
-footer {
-    margin-top: 10px;
-    text-align: center;
-    font-size: 0.8rem;
-}
-
-a, .link {
-    cursor: pointer;
-    text-decoration: underline;
-    color: rgb(97, 97, 255);
-}
-
-a:hover, .link:hover {
-    text-decoration: underline dashed;
-}
-
-input, select, option {
-    color: black;
-}
-
-button, input[type="submit"], input[type="reset"] {
-    color: whitesmoke;
-    background-color: #555555;
-    border: none;
-    border-radius: 10px;
-    padding: 5px;
-    transition: box-shadow .2s;
-}
-
-button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
-    box-shadow: 0 2px 5px rgb(0, 0, 0); 
-}
-
-td {
-    text-align: center;
-}
-
-.info-text {
-    font-size: 0.8rem;
-    opacity: 75%;
-    text-align: center;
-}
-
-.justifyed-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
-#warning-not-finished {
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
 #main {
     display: block;
-    min-width: 530px;
+    min-width: fit-content;
     max-width: 1100px;
     margin: 0 auto;
 }
@@ -75,13 +11,35 @@ td {
     justify-content: center;
 
     margin: 0 25px;
-    background-color: #222222;
+    background-color: var(--main-bg2-color);
     border-radius: 25px;
-    padding-top: 20px;
-    padding-bottom: 25px;
+    padding: 20px;
 }
 
 #settings-form > h2 {
     font-size: 1.55rem;
     text-align: center;
+}
+
+#engine-placeholder, #eval-mode, #window-target {
+    width: 125px;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+img[src="./assets/arrow_up.svg"], img[src="./assets/arrow_down.svg"], img[src="./assets/x.svg"] {
+    filter: invert(1);
+}
+
+#engine-add-button {
+    margin-bottom: 0;
+}
+
+.engine-name input {
+    width: 200px;
+}
+
+.engine-url input {
+    width: 300px;
 }
