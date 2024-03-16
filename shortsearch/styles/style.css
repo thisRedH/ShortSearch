@@ -20,6 +20,7 @@
 
 body {
     background-color: var(--main-bg1-color);
+    animation: fadeIn 0.75s ease-out;
 }
 
 footer {

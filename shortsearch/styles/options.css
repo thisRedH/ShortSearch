@@ -33,6 +33,10 @@
     width: 100%;
 }
 
+.engine {
+    animation: fadeIn 0.25s ease-in;
+}
+
 #engine-placeholder, #eval-mode, #window-target {
     width: 125px;
     border-radius: 8px;
@@ -53,14 +57,6 @@ img[src="./assets/x.svg"] {
 #engine-add-button {
     margin-bottom: 0;
 }
-
-/* .engine-number {
-    width: 1%;
-}
-
-.engine-name /* input  {
-    width: 200px;
-} */
 
 .engine-url {
     width: 100%;
