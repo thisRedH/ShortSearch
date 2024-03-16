@@ -40,6 +40,7 @@ a:hover, .link:hover {
 
 label {
     vertical-align: middle;
+    cursor: text;
 }
 
 option {
@@ -63,6 +64,7 @@ button, input, select {
 
 button, input[type="submit"], input[type="reset"] {
     margin: 6px 2px;
+    cursor: pointer;
 }
 
 button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
