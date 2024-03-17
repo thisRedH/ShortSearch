@@ -1,9 +1,7 @@
 
-.info-text, .info-text a, .info-text .link,
-.info-text p, .info-text span {
+.info-text, .info-text * {
     text-align: center;
     font-size: 0.78rem;
-    opacity: 75%;
 
     margin-top: 8px;
     margin-bottom: 8px;
@@ -22,6 +20,14 @@
 .align-center {
     display: flex;
     align-items: center;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.display-none {
+    display: none;
 }
 
 @keyframes fadeIn {

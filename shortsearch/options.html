@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>ShortSearch Settings</title>
     <link rel="stylesheet" href="styles/helper.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/options.css">
@@ -12,85 +12,93 @@
     <noscript>
         No Javascript
     </noscript>
-    
-    <div id="main">
-        <p class="info-text">
-            This extension is not finished. Stuff will break!
-        </p>
-        
-        <div id="settings-card">
-            <form id="settings-form">
-                <h2>Settings</h2>
-                
-                <div id="engines">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="engine-number"></th>
-                                <th class="engine-name">Name</th>
-                                <th class="engine-url">URL</th>
-                            </tr>
-                        </thead>
-                        
-                        <!--Populatet by options.js-->
-                        <tbody id="engines-container"></tbody>
-                    </table>
-                    
-                    <div class="justify-center">
-                        <button type="button" id="engine-add-button">Add Search Engine</button>
-                    </div>
-                    
+
+    <p class="info-text">
+        This extension is not finished. Stuff will break!
+    </p>
+
+    <div id="settings-card">
+        <form id="settings-form">
+            <h1>ShortSearch Settings</h1>
+
+            <div id="engines">
+                <table>
+                    <thead>
+                        <th class="engine-number"></th>
+                        <th class="engine-name">Name</th>
+                        <th class="engine-url">URL</th>
+                    </thead>
+
                     <!--Populatet by options.js-->
-                    <datalist id="engines-name-list"></datalist>
-                    <!--Populatet by options.js-->
-                    <datalist id="engines-url-list"></datalist>
+                    <tbody id="engines-container"></tbody>
+                </table>
+
+                <div class="justify-center">
+                    <button type="button" id="engine-add-button">Add Search Engine</button>
                 </div>
-                
-                <p class="info-text">
-                    <!--redirect happens in script!-->
-                    To set shortcut's please visit
-                    <a id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
-                </p>
-                
-                <div class="justify-space-between align-center">
-                    <!--TODO: windowTarget-->
-                    <label for="window-target">Open in</label>
+
+                <!--Populatet by options.js-->
+                <datalist id="engines-name-list"></datalist>
+                <!--Populatet by options.js-->
+                <datalist id="engines-url-list"></datalist>
+            </div>
+
+            <p class="info-text">
+                To set shortcut's please visit
+                <a id="open-chrome-shortcuts">chrome://extensions/shortcuts</a>
+                <!--redirect happens in script!-->
+            </p>
+
+            <div class="justify-space-between align-center">
+                <!--TODO: windowTarget-->
+                <label for="window-target">Open in</label>
+
+                <div class="align-center">
                     <select name="window-target" id="window-target">
                         <option value="_blank">New Tab</option>
                         <option value="_self">Same Tab</option>
                     </select>
+                    <img class="info-button hidden" src="assets/info_icon.svg" alt="Info icon button">
                 </div>
-                
-                <div class="justify-space-between align-center">
-                    <!--TODO: enginePlaceholder-->
-                    <label for="engine-placeholder">Placeholder in URL</label>
-                    <input id="engine-placeholder" type="text">
-                </div>
+            </div>
 
-                <div class="justify-space-between align-center">
-                    <!--TODO: evalMode-->
-                    <label for="eval-mode">Link auto evaluation Engine</label>
+            <div class="justify-space-between align-center">
+                <!--TODO: enginePlaceholder-->
+                <label for="engine-placeholder">Placeholder in URL</label>
+
+                <div class="align-center">
+                    <input id="engine-placeholder" type="text">
+                    <img class="info-button" src="assets/info_icon.svg" alt="Info icon button">
+                </div>
+            </div>
+
+            <div class="justify-space-between align-center">
+                <!--TODO: evalMode-->
+                <label for="eval-mode">Link auto evaluation Engine</label>
+
+                <div class="align-center">                    
                     <select name="eval-mode" id="eval-mode">
                         <option value="off">None</option>
                         <option value="strict">Strict</option>
                         <option value="loose">Generous</option>
                     </select>
+                    <img class="info-button" src="assets/info_icon.svg" alt="Info icon button">
                 </div>
-                
-                <div class="justify-center">
-                    <input type="submit" value="Save">
-                    <!--TODO: Add function to reset-->
-                    <button type="button">Reset</button>
-                </div>
-            </form>
-        </div>
-        
-        <footer>
-            2024 © thisRedH<br>
-            Licensed under the MIT License
-        </footer>
+            </div>
+
+            <div class="justify-center">
+                <input type="submit" value="Save">
+                <!--TODO: Add function to reset-->
+                <button type="button">Reset</button>
+            </div>
+        </form>
     </div>
-    
+
+    <footer>
+        2024 © thisRedH<br>
+        Licensed under the MIT License
+    </footer>
+
     <script src="scripts/common/misc.js"></script>
     <script src="scripts/common/data.js"></script>
     <script defer src="scripts/options.js"></script>
