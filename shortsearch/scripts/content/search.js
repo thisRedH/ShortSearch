@@ -1,7 +1,7 @@
 
 function normalizeURL(url) {
     const pattern = /^((([a-z]*):)?\/{2})?|\/{2}/i;
-    return "//" + url.replace(pattern, "");
+    return "http://" + url.replace(pattern, "");
 }
 
 // from https://stackoverflow.com/a/5717133/22279121

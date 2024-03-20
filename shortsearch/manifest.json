@@ -24,7 +24,8 @@
                 "scripts/content/search.js"
             ],
             "matches": [
-                "*://*/*"
+                "*://*/*",
+                "file:///*"
             ],
             "all_frames": true
         }
