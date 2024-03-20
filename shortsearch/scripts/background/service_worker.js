@@ -1,17 +1,18 @@
 
 importScripts("../common/misc.js");
+importScripts("../common/data.js");
 
 chrome.commands.onCommand.addListener(async (command, tab) => {
 if (command.startsWith("search_selected_txt")) {
     // Send message to content script
     try {
         const engineNumber = LAST_NUMBER.exec(command)[1];
-        const enginesList = ((await chrome.storage.sync.get("enginesList")).enginesList);
-        var engine = enginesList[engineNumber];
+        const settings = await loadSettings(DEFAULT_SETTINGS);
+        var engine = settings.enginesList[engineNumber];
 
         if (!engine) {
             showWarn(`Engine ${engineNumber} does not exist! Using fallback engine 0`);
-            engine = enginesList[0];
+            engine = settings.enginesList[0];
         }
 
         if (!engine) {                          //TODO: Use error screen (make error.html)
@@ -22,11 +23,11 @@ if (command.startsWith("search_selected_txt")) {
         await chrome.tabs.sendMessage(tab.id, {
             event: "search_sel",
             engineURL: engine.url,
-            enginePlaceholder: "%s",            //TODO: load from save + implement in options
-            evalMode: "loose",                  //TODO: load from save + implement in options
-            windowTarget: "_blank"              //TODO: load from save + implement in options
+            windowTarget: settings.windowTarget,
+            enginePlaceholder: settings.enginePlaceholder,
+            evalMode: settings.evalMode,
         });
-    } catch(err) { try {
-        showError(err.message);
-    } catch(e) { ()=>{}; }}
+    } catch(err) {
+        console.warn(err);
+    }
 }});

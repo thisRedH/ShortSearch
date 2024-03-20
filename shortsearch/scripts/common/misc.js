@@ -55,19 +55,20 @@ function populateDatalist(datalist, options) {
 }
 
 /**
- * Loads Settings from chrome.storage.sync
- * @param {Object} defaultSettings Fallback when no Setting are found (saves them then)
- * @returns {Promise<Object>} Settings
+ * Loads Settings from chrome.storage.sync, or saves default values if none exist.
+ * @param {Object} defaultSettings - Fallback settings to save if none exist.
+ * @returns {Promise<Object>} - The loaded settings.
  */
 async function loadSettings(defaultSettings) {
-    var settings = await chrome.storage.sync.get(null);
+    let settings = defaultSettings;
 
-    if (!settings) {
-        settings = defaultSettings;
-        saveSettings(settings);
-    }
+    try {
+        const loadedSettings = await chrome.storage.sync.get(null);
+        settings = {...defaultSettings, ...loadedSettings};
+    } catch (e) { }
 
-    return settings
+    saveSettings(settings);
+    return settings;
 }
 
 /**
@@ -75,5 +76,9 @@ async function loadSettings(defaultSettings) {
  * @param {Object} settings 
  */
 async function saveSettings(settings) {
-    await chrome.storage.sync.set(settings);
+    try {
+        await chrome.storage.sync.set(settings);
+    } catch (e) {
+        throw new Error("Could not save settings", e);
+    }
 }
