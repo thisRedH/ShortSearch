@@ -70,5 +70,8 @@ const DEFAULT_SETTINGS = {
         {"name": "Youtube",         "url": ENGINES_DATALIST["Youtube"]},
         {"name": "Wikipedia",       "url": ENGINES_DATALIST["Wikipedia"]},
         {"name": "Stack Overflow",  "url": ENGINES_DATALIST["Stack Overflow"]},
-    ]
+    ],
+    "windowTarget": "_blank",
+    "enginePlaceholder": "%s",
+    "evalMode": "loose"
 }

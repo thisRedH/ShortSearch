@@ -112,14 +112,17 @@ function reorderSearchEngins() {
 async function saveSettingsForm() {
     let formData = new FormData(document.getElementById("settings-form"));
 
-    var enginesList = [];
-    var enginesNoSpecial = [];
-    var enginesEmpty = [];
+    let optEnginesList = [];
+    let enginesNoSpecial = [];
+    let enginesEmpty = [];
+    let iterEngines = 0;
 
-    var iterEngines = 0;
+    let optWindowTarget = "";
+    let optEnginePlaceholder = "";
+    let optEvalMode = "";
 
     for (let [id, value] of formData.entries()) {
-        // IDT_ENGINE_NAME
+        // IDT_ENGINE_NAME && IDT_ENGINE_URL
         if (id.startsWith(IDT_ENGINE_NAME)) {
             const engineIDNumber = LAST_NUMBER.exec(id)[1];
 
@@ -130,7 +133,7 @@ async function saveSettingsForm() {
                 name: nameData,
                 url: urlData,
             };
-            enginesList.push(engine);
+            optEnginesList.push(engine);
 
             if (!urlData) {
                 enginesEmpty.push(iterEngines);
@@ -139,34 +142,41 @@ async function saveSettingsForm() {
             }
 
             iterEngines++;
-        // IDT_ENGINE_URL
-        } else if (id.startsWith(IDT_ENGINE_URL)) {
-            // Handlet with IDT_ENGINE_NAME
+        } else if (id === "window-target") {
+            optWindowTarget = value;
+        } else if (id === "engine-placeholder") {
+            optEnginePlaceholder = value;
+        } else if (id === "eval-mode") {
+            optEvalMode = value;
+        } else {
             continue;
         }
     }
 
     // Save to Chrome
     try {
-        await saveSettings({enginesList});
+        await saveSettings({
+            enginesList: optEnginesList,
+            windowTarget: optWindowTarget,
+            enginePlaceholder: optEnginePlaceholder,
+            evalMode: optEvalMode
+        });
     } catch (error) {
         showError("Could not save settings", error);
     }
 
     // Errors
     if (enginesEmpty.length) {
-        var msg = `Search Engine ${enginesEmpty} dosn't have an URL.\nIt will not work!`
-        if (enginesEmpty.length > 1) {
-            var msg = `Search Engine's ${beautifyArray(enginesEmpty)} don't have a URL.\nThey will not work!`
-        }
+        var msg = `Search Engine ${enginesEmpty} dosn't have an URL.\nIt will not work!`;
+        if (enginesEmpty.length > 1)
+            var msg = `Search Engine's ${beautifyArray(enginesEmpty)} don't have a URL.\nThey will not work!`;
 
         showError(msg);
     }
     if (enginesNoSpecial.length) {
         var msg = `Search Engine ${enginesNoSpecial} dosn't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nIt will not work as expected!`
-        if (enginesNoSpecial.length > 1) {
-            var msg = `Search Engine's ${beautifyArray(enginesNoSpecial)} don't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nThey will not work as expected!`
-        }
+        if (enginesNoSpecial.length > 1)
+            var msg = `Search Engine's ${beautifyArray(enginesNoSpecial)} don't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nThey will not work as expected!`;
 
         showError(msg);
     }
@@ -176,6 +186,10 @@ function displaySettings(settings) {
     for (const engine of settings.enginesList) {
         addSearchEngine(engine.name, engine.url);
     }
+
+    document.getElementById("window-target").value = settings.windowTarget;
+    document.getElementById("engine-placeholder").value = settings.enginePlaceholder;
+    document.getElementById("eval-mode").value = settings.evalMode;
 }
 
 addEventListener("DOMContentLoaded", () => {
