@@ -195,19 +195,21 @@ function displaySettings(settings) {
 function openInfoBox(infoId) {
     document.getElementById("inf-box-wrapper").classList.remove("display-none");
     document.getElementById(infoId).classList.remove("display-none");
+    document.getElementById("inf-null-txt").classList.add("display-none");
 }
 
 function closeInfoBox() {
     const infBoxWrapper = document.getElementById("inf-box-wrapper");
-
+    
     infBoxWrapper.classList.add("fade-out-short");
     infBoxWrapper.addEventListener("animationend", (e) => {
         infBoxWrapper.classList.remove("fade-out-short");
         infBoxWrapper.classList.add("display-none");
-
+        
         for (const child of document.getElementById("inf-box").children)
-            if (child.id.startsWith("inf-txt-"))
+            if (/^inf-.*-txt$/.test(child.id))
                 child.classList.add("display-none");
+        document.getElementById("inf-null-txt").classList.remove("display-none");
     }, {once: true});
 }
 
@@ -215,6 +217,19 @@ addEventListener("DOMContentLoaded", () => {
     loadSettings(DEFAULT_SETTINGS).then(displaySettings);
     populateDatalist(document.getElementById("engines-name-list"), Object.keys(ENGINES_DATALIST));
     populateDatalist(document.getElementById("engines-url-list"), Object.values(ENGINES_DATALIST));
+
+    document.getElementById("engine-add-button").addEventListener("click", e => {addSearchEngine()});
+
+    document.getElementById("inf-box-close-btn").addEventListener("click", e => {closeInfoBox()});
+    document.getElementById("inf-box-bckrnd").addEventListener("click", e => {closeInfoBox()});
+    document.getElementById("inf-box").addEventListener("click", e => {e.stopPropagation()});
+
+    document.querySelectorAll(".inf-btn").forEach((infBtn) => {
+        if (infBtn.classList.contains("hidden")) return;
+        infBtn.addEventListener("click", e => {
+            openInfoBox(infBtn.id + "-txt");
+        });
+    })
 
     document.getElementById("settings-form").addEventListener("submit", async (e) => {
         e.preventDefault();

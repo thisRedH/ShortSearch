@@ -34,7 +34,7 @@
                 </table>
 
                 <div class="justify-center">
-                    <button type="button" id="engine-add-button" onclick="addSearchEngine()">Add Search Engine</button>
+                    <button type="button" id="engine-add-button">Add Search Engine</button>
                 </div>
 
                 <!--Populatet by options.js-->
@@ -57,7 +57,7 @@
                         <option value="_blank">New Tab</option>
                         <option value="_self">Same Tab</option>
                     </select>
-                    <img class="inf-btn hidden" src="assets/info_icon.svg" alt="Info icon button" onclick="openInfoBox('inf-txt-no-info')">
+                    <img class="inf-btn hidden" id="inf-window-target" src="assets/info_icon.svg" alt="Info icon button"">
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
 
                 <div class="align-center">
                     <input name="engine-placeholder" id="engine-placeholder" type="text">
-                    <img class="inf-btn" src="assets/info_icon.svg" alt="Info icon button" onclick="openInfoBox('inf-txt-engine-placeholder')">
+                    <img class="inf-btn" id="inf-engine-placeholder" src="assets/info_icon.svg" alt="Info icon button">
                 </div>
             </div>
 
@@ -79,7 +79,7 @@
                         <option value="strict">Strict</option>
                         <option value="loose">Generous</option>
                     </select>
-                    <img class="inf-btn" src="assets/info_icon.svg" alt="Info icon button" onclick="openInfoBox('inf-txt-eval-mode')">
+                    <img class="inf-btn" id="inf-eval-mode" src="assets/info_icon.svg" alt="Info icon button">
                 </div>
             </div>
 
@@ -92,21 +92,21 @@
     </div>
 
     <div class="display-none fade-in-short" id="inf-box-wrapper">
-        <div id="inf-box-bckrnd" onclick="closeInfoBox()">
-            <div id="inf-box" onclick="event.stopPropagation()">
-                <div class="display-none" id="inf-txt-null">Null: Could not load this info (This is a bug)</div>
-                <div class="display-none" id="inf-txt-no-info">No info to see here (This is a bug)</div>
-                <div class="display-none" id="inf-txt-engine-placeholder">
+        <div id="inf-box-bckrnd">
+            <div id="inf-box">
+                <div id="inf-null-txt">Null: Could not load this info (This is a bug)</div>
+                <div class="display-none" id="inf-no-info-txt">No info to see here (This is a bug)</div>
+                <div class="display-none" id="inf-engine-placeholder-txt">
                     <h2>Placeholder in URL</h2>
                     TODO: Add info (engine-placeholder)<br>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci vel fugit laborum quas, officiis tenetur laudantium ea porro eaque, magnam temporibus ipsum a omnis delectus exercitationem dolore vitae aperiam. Consequuntur.
                 </div>
-                <div class="display-none" id="inf-txt-eval-mode">
+                <div class="display-none" id="inf-eval-mode-txt">
                     <h2>Link auto evaluation Engine</h2>
                     TODO: Add info (eval-mode)<br>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, illo ab! Nulla tenetur incidunt blanditiis dolorum a! Officia, repellat excepturi itaque libero, consequuntur praesentium voluptatem nostrum rem eaque ea similique.
                 </div>
-                <button onclick="closeInfoBox()">Close</button>
+                <button id="inf-box-close-btn">Close</button>
             </div>
         </div>
     </div>
