@@ -232,6 +232,11 @@ addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".inf-btn").forEach((infBtn) => {
         if (infBtn.classList.contains("hidden")) return;
+
+        infBtn.addEventListener("keypress", e => {
+            if (e.key === "Enter")
+                openInfoBox(infBtn.id + "-txt");
+        });
         infBtn.addEventListener("click", e => {
             openInfoBox(infBtn.id + "-txt");
         });
