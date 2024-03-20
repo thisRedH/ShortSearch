@@ -199,16 +199,24 @@ addEventListener("DOMContentLoaded", () => {
                 url: "chrome://extensions/shortcuts",
                 active: active,
                 index: tab.index +1
-            });
+            }, (tabNew => {
+                // Use Groupes if available
+                if (tab.groupId >= 0) {
+                    console.log(tab.groupId);
+                    chrome.tabs.group({
+                        tabIds: [tabNew.id],
+                        groupId: tab.groupId}
+                    );
+                }
+            }));
         });
     };
 
     document.getElementById("open-chrome-shortcuts").addEventListener("keypress", (e) => {
         e.preventDefault();
 
-        if (e.key === "Enter") {
+        if (e.key === "Enter")
             goToShortcuts(true);
-        }
     });
 
     document.getElementById("open-chrome-shortcuts").addEventListener("mousedown", (e) => {
