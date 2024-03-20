@@ -193,17 +193,30 @@ addEventListener("DOMContentLoaded", () => {
         saveSettingsForm();
     });
 
+    function goToShortcuts(active = true) {
+        chrome.tabs.getCurrent(tab => {
+            chrome.tabs.create({
+                url: "chrome://extensions/shortcuts",
+                active: active,
+                index: tab.index +1
+            });
+        });
+    };
+
+    document.getElementById("open-chrome-shortcuts").addEventListener("keypress", (e) => {
+        e.preventDefault();
+
+        if (e.key === "Enter") {
+            goToShortcuts(true);
+        }
+    });
+
     document.getElementById("open-chrome-shortcuts").addEventListener("mousedown", (e) => {
         e.preventDefault();
 
-        if (e.button === 0 || e.button === 1) {
-            chrome.tabs.create({
-                url: "chrome://extensions/shortcuts",
-                active: false
-            }).then(tab => {
-                if (e.button === 0)
-                    chrome.tabs.update(tab.id, {active: true});
-            });
-        }
+        if (e.button === 0)
+            goToShortcuts(true);
+        if (e.button === 1)
+            goToShortcuts(false);
     });
 });
