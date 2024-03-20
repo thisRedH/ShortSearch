@@ -20,7 +20,7 @@ function addSearchEngine(name = "", url = "") {
     }
 
     const newEngine = document.createElement("tr");
-    newEngine.className = "engine";
+    newEngine.className = "engine engine-fade-in";
     newEngine.id = IDT_ENGINE + count;
     newEngine.innerHTML = `
         <td class="engine-number"><span>${count}</span>.</td>
@@ -32,6 +32,11 @@ function addSearchEngine(name = "", url = "") {
     `;
     
     container.appendChild(newEngine);
+
+    newEngine.addEventListener("animationend", (e) => {
+        if (e.target.classList.contains("engine-fade-in"))
+            newEngine.classList.remove("engine-fade-in");
+    }, {once: true})
 
     // Automatic url when name found in ENGINES_DATALIST_DICT
     document.getElementById(`${IDT_ENGINE_NAME}${count}`).addEventListener("input", (e) => {
@@ -67,9 +72,12 @@ function removeSearchEngine(id) {
         return;
     }
 
-    document.getElementById(id).remove();
-
-    reorderSearchEngins();
+    const engine = document.getElementById(id);
+    engine.classList.add("engine-fade-out");
+    engine.addEventListener("animationend", (e) => {
+        engine.remove();
+        reorderSearchEngins();
+    }, {once: true})
 }
 
 function moveUpSearchEngine(id) {

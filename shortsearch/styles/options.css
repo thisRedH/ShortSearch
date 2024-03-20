@@ -38,8 +38,12 @@ body {
     margin-top: 15px;
 }
 
-.engine {
+.engine-fade-in {
     animation: fadeIn 0.25s ease-in;
+}
+
+.engine-fade-out {
+    animation: fadeOut 0.25s ease-out;
 }
 
 #engine-placeholder, #eval-mode, #window-target {
