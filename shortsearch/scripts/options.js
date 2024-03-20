@@ -195,15 +195,14 @@ addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("open-chrome-shortcuts").addEventListener("mousedown", (e) => {
         e.preventDefault();
-        console.log(e);
-        if (e.button === 0) {                   // 0 = Main button (left)
-            chrome.tabs.update({
-                url: "chrome://extensions/shortcuts"
-            });
-        } else if (e.button === 1) {            // 1 = Auxiliary button (middle)
+
+        if (e.button === 0 || e.button === 1) {
             chrome.tabs.create({
                 url: "chrome://extensions/shortcuts",
                 active: false
+            }).then(tab => {
+                if (e.button === 0)
+                    chrome.tabs.update(tab.id, {active: true});
             });
         }
     });
