@@ -103,6 +103,7 @@ img[src="./assets/x.svg"] {
     
     height: fit-content;
     min-width: 400px;
+    max-width: 800px;
     
     background-color: var(--main-bg2-color);
     border-radius: 25px;

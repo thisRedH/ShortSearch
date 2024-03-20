@@ -182,6 +182,12 @@ async function saveSettingsForm() {
     }
 }
 
+function resetSettings() {
+    document.getElementById("engines-container").innerHTML = "";
+    displaySettings(DEFAULT_SETTINGS);
+    saveSettingsForm();
+}
+
 function displaySettings(settings) {
     for (const engine of settings.enginesList) {
         addSearchEngine(engine.name, engine.url);
@@ -238,8 +244,7 @@ addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("settings-form").addEventListener("reset", async (e) => {
         e.preventDefault();
-        document.getElementById("engines-container").innerHTML = "";
-        displaySettings(DEFAULT_SETTINGS);
+        resetSettings();
     })
 
     function goToShortcuts(active = true) {
