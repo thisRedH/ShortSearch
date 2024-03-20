@@ -20,7 +20,7 @@ function addSearchEngine(name = "", url = "") {
     }
 
     const newEngine = document.createElement("tr");
-    newEngine.className = "engine engine-fade-in";
+    newEngine.className = "engine fade-in-short";
     newEngine.id = IDT_ENGINE + count;
     newEngine.innerHTML = `
         <td class="engine-number"><span>${count}</span>.</td>
@@ -34,8 +34,8 @@ function addSearchEngine(name = "", url = "") {
     container.appendChild(newEngine);
 
     newEngine.addEventListener("animationend", (e) => {
-        if (e.target.classList.contains("engine-fade-in"))
-            newEngine.classList.remove("engine-fade-in");
+        if (e.target.classList.contains("fade-in-short"))
+            newEngine.classList.remove("fade-in-short");
     }, {once: true})
 
     // Automatic url when name found in ENGINES_DATALIST_DICT
@@ -73,7 +73,7 @@ function removeSearchEngine(id) {
     }
 
     const engine = document.getElementById(id);
-    engine.classList.add("engine-fade-out");
+    engine.classList.add("fade-out-short");
     engine.addEventListener("animationend", (e) => {
         engine.remove();
         reorderSearchEngins();
@@ -192,15 +192,29 @@ function displaySettings(settings) {
     document.getElementById("eval-mode").value = settings.evalMode;
 }
 
+function openInfoBox(infoId) {
+    document.getElementById("inf-box-wrapper").classList.remove("display-none");
+    document.getElementById(infoId).classList.remove("display-none");
+}
+
+function closeInfoBox() {
+    const infBoxWrapper = document.getElementById("inf-box-wrapper");
+
+    infBoxWrapper.classList.add("fade-out-short");
+    infBoxWrapper.addEventListener("animationend", (e) => {
+        infBoxWrapper.classList.remove("fade-out-short");
+        infBoxWrapper.classList.add("display-none");
+
+        for (const child of document.getElementById("inf-box").children)
+            if (child.id.startsWith("inf-txt-"))
+                child.classList.add("display-none");
+    }, {once: true});
+}
+
 addEventListener("DOMContentLoaded", () => {
     loadSettings(DEFAULT_SETTINGS).then(displaySettings);
     populateDatalist(document.getElementById("engines-name-list"), Object.keys(ENGINES_DATALIST));
     populateDatalist(document.getElementById("engines-url-list"), Object.values(ENGINES_DATALIST));
-
-
-    document.getElementById("engine-add-button").addEventListener("click", () => {
-        addSearchEngine();
-    });
 
     document.getElementById("settings-form").addEventListener("submit", async (e) => {
         e.preventDefault();
