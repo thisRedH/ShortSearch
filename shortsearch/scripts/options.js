@@ -236,6 +236,12 @@ addEventListener("DOMContentLoaded", () => {
         saveSettingsForm();
     });
 
+    document.getElementById("settings-form").addEventListener("reset", async (e) => {
+        e.preventDefault();
+        document.getElementById("engines-container").innerHTML = "";
+        displaySettings(DEFAULT_SETTINGS);
+    })
+
     function goToShortcuts(active = true) {
         chrome.tabs.getCurrent(tab => {
             chrome.tabs.create({
