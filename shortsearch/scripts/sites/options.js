@@ -23,14 +23,14 @@ function addSearchEngine(name = "", url = "") {
     newEngine.className = "engine fade-in-short";
     newEngine.id = IDT_ENGINE + count;
     newEngine.innerHTML = `
-        <td class="engine-number"><span>${count}</span>.</td>
-        <td class="engine-name"><input name="engine-name-${count}" id="${IDT_ENGINE_NAME}${count}" list="engines-name-list" value="${name}"></td>
-        <td class="engine-url"><input name="engine-url-${count}" id="${IDT_ENGINE_URL}${count}" list="engines-url-list" value="${url}"></td>
-        <td class="engine-remove"><a href="javascript:void(0)" name="engine-remove-${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button"></a></td>
-        <td class="engine-move-up"><a href="javascript:void(0)" name="engine-move-up-${count}" id="${IDT_ENGINE_MOVE_UP}${count}"><img src="./assets/arrow_up.svg" alt="Move Up Button"></a></td>
-        <td class="engine-move-down"><a href="javascript:void(0)" name="engine-move-down-${count}" id="${IDT_ENGINE_MOVE_DOWN}${count}"><img src="./assets/arrow_down.svg" alt="Move Down Button"></a></td>
+        <td class="engine-number"><span>${count +1}</span>.</td>
+        <td class="engine-name"><input name="${IDT_ENGINE_NAME}${count}" id="${IDT_ENGINE_NAME}${count}" list="engines-name-list" value="${name}"></td>
+        <td class="engine-url"><input name="${IDT_ENGINE_URL}${count}" id="${IDT_ENGINE_URL}${count}" list="engines-url-list" value="${url}"></td>
+        <td class="engine-remove"><a href="javascript:void(0)" name="${IDT_ENGINE_REMOVE}${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button"></a></td>
+        <td class="engine-move-up"><a href="javascript:void(0)" name="${IDT_ENGINE_MOVE_UP}${count}" id="${IDT_ENGINE_MOVE_UP}${count}"><img src="./assets/arrow_up.svg" alt="Move Up Button"></a></td>
+        <td class="engine-move-down"><a href="javascript:void(0)" name="${IDT_ENGINE_MOVE_DOWN}${count}" id="${IDT_ENGINE_MOVE_DOWN}${count}"><img src="./assets/arrow_down.svg" alt="Move Down Button"></a></td>
     `;
-    
+
     container.appendChild(newEngine);
 
     newEngine.addEventListener("animationend", (e) => {
@@ -82,10 +82,10 @@ function removeSearchEngine(id) {
 
 function moveUpSearchEngine(id) {
     const engine = document.getElementById(id);
-    
+
     if(engine.previousElementSibling)
         engine.parentNode.insertBefore(engine, engine.previousElementSibling);
-    
+
     reorderSearchEngins();
 }
 
@@ -94,7 +94,7 @@ function moveDownSearchEngine(id) {
 
     if(engine.nextElementSibling)
         engine.parentNode.insertBefore(engine.nextElementSibling, engine);
-    
+
     reorderSearchEngins();
 }
 
@@ -105,7 +105,7 @@ function reorderSearchEngins() {
     for (let i = 0; i < children.length; i++) {
         let engine = children[i];
         let numberObj = engine.querySelector("td.engine-number > span");
-        numberObj.innerHTML = i;
+        numberObj.innerHTML = i +1;
     }
 }
 
@@ -206,12 +206,12 @@ function openInfoBox(infoId) {
 
 function closeInfoBox() {
     const infBoxWrapper = document.getElementById("inf-box-wrapper");
-    
+
     infBoxWrapper.classList.add("fade-out-short");
     infBoxWrapper.addEventListener("animationend", (e) => {
         infBoxWrapper.classList.remove("fade-out-short");
         infBoxWrapper.classList.add("display-none");
-        
+
         for (const child of document.getElementById("inf-box").children)
             if (/^inf-.*-txt$/.test(child.id))
                 child.classList.add("display-none");
