@@ -52,6 +52,18 @@ footer a:hover {
     margin-left: 0;
 }
 
+.info-text {
+    color: var(--main-txt-sup-color);
+}
+
+.info-text, .info-text * {
+    text-align: center;
+    font-size: 0.78rem;
+
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
 #settings-card {
     display: flex;
     justify-content: center;

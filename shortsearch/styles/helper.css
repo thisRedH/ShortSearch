@@ -1,12 +1,3 @@
-
-.info-text, .info-text * {
-    text-align: center;
-    font-size: 0.78rem;
-
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
 .justify-center {
     display: flex;
     justify-content: center;
