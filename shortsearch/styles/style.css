@@ -1,81 +1,39 @@
-
+/* This has to be defined in every page after this */
 :root {
     --main-bg1-color: #000;
-    --main-bg2-color: #222;
-    --main-text-color: whitesmoke;
-    --main-text-link-color: #6161FF;
-    --main-accent-bg-color: #555;
-    --main-accent-text-color: whitesmoke;
+    --main-bg2-color: #000;
+    --main-bg-accent-color: #fff;
+    --main-txt-color: #fff;
+    --main-txt-sup-color: #555;
+    --main-txt-link-color: #00f;
+    --main-txt-accent-color: #000;
+    --main-fnt-fam: sans-serif;
+    --main-fnt-fam-accent: sans-serif;
 }
 
 * {
-    color: var(--main-text-color);
+    color: var(--main-txt-color);
     font-size: 1rem;
     font-style: normal;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--main-fnt-fam);
 
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
 }
 
 body {
     background-color: var(--main-bg1-color);
-    animation: fadeIn 0.75s ease-out;
-}
-
-footer {
-    margin: 10px 0;
-    text-align: center;
-    font-size: 0.8rem;
 }
 
 a, .link {
     cursor: pointer;
     text-decoration: underline;
-    color: var(--main-text-link-color);
-}
-
-a:hover, .link:hover {
-    text-decoration: underline dashed;
+    color: var(--main-txt-link-color);
 }
 
 label {
-    vertical-align: middle;
     cursor: text;
-}
-
-button, input, select {
-    background-color: var(--main-accent-bg-color);
-    color: var(--main-accent-text-color);
-    font-family: sans-serif;
-
-    height: 30px;
-    box-sizing: border-box;
-    margin: 2px;
-    border-style: none;
-    border-radius: 10px;
-    padding: 5px;
-    transition: box-shadow .3s, scale .2s;
-}
-
-button, input[type="submit"], input[type="reset"] {
-    margin: 6px 2px;
-    cursor: pointer;
-}
-
-button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
-    box-shadow: 0 2px 5px #000;
-    scale: 1.04;
-}
-
-input:not([type="submit"], [type="reset"]), select {
-    border-style: solid;
-    border-width: 2px;
-    border-color: var(--main-accent-text-color);
-}
-
-select {
-    text-align: center;
 }
 
 table {
@@ -83,7 +41,36 @@ table {
 }
 
 td {
-    text-align: center;
     padding: 2px;
     width: 1%;
+}
+
+footer, footer *{
+    font-size: 0.8rem;
+    color: var(--main-txt-sup-color);
+}
+
+button, input, select {
+    background-color: var(--main-bg-accent-color);
+    color: var(--main-txt-accent-color);
+    font-family: sans-serif;
+
+    height: 30px;
+    margin: 2px;
+    border-style: none;
+    border-radius: 10px;
+    padding: 5px;
+    transition: box-shadow .3s, scale .2s;
+}
+
+button, input[type="button"],
+input[type="submit"], input[type="reset"] {
+    margin: 6px 2px;
+    cursor: pointer;
+}
+
+button:hover, input[type="button"]:hover,
+input[type="submit"]:hover, input[type="reset"]:hover {
+    box-shadow: 0 2px 5px #000;
+    scale: 1.04;
 }

@@ -39,3 +39,19 @@
     0% { opacity: 1; }
     100% { opacity: 0; }
 }
+
+.fade-in-short {
+    animation: fadeIn .25s ease-in;
+}
+
+.fade-out-short {
+    animation: fadeOut .25s ease-out;
+}
+
+.fade-in-00-250 {
+    animation: fadeIn .25s ease-in;
+}
+
+.fade-out-00-250 {
+    animation: fadeOut .25s ease-out;
+}

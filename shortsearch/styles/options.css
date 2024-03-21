@@ -1,9 +1,55 @@
+:root {
+    --main-bg1-color: #000;
+    --main-bg2-color: #222;
+    --main-bg-accent-color: #555;
+    --main-txt-color: whitesmoke;
+    --main-txt-sup-color: gray;
+    --main-txt-link-color: #6161FF;
+    --main-txt-accent-color: whitesmoke;
+    --main-fnt-fam: "Montserrat", sans-serif;
+    --main-fnt-fam-accent: sans-serif;
+}
 
 body {
     display: block;
     min-width: fit-content;
     max-width: 1020px;
     margin: 0 auto;
+    animation: fadeIn 0.75s ease-out;
+}
+
+select, input:not([type="submit"], [type="reset"], [type="button"]) {
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--main-txt-accent-color);
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 60px;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.fter-links {
+    display: flex;
+    list-style-type: none;
+}
+
+.fter-links a {
+    margin-left: 5px;
+}
+
+.fter-links li:first-child a {
+    margin-left: 0;
 }
 
 #settings-card {
@@ -17,7 +63,7 @@ body {
 
     border-style: solid;
     border-width: 2px;
-    border-color: var(--main-accent-bg-color);
+    border-color: var(--main-bg-accent-color);
 }
 
 #settings-form {
@@ -38,14 +84,6 @@ body {
     margin-top: 15px;
 }
 
-.fade-in-short {
-    animation: fadeIn 0.25s ease-in;
-}
-
-.fade-out-short {
-    animation: fadeOut 0.25s ease-out;
-}
-
 #engine-placeholder, #eval-mode, #window-target {
     width: 125px;
     border-radius: 8px;
@@ -53,7 +91,7 @@ body {
     border-style: solid;
 }
 
-#engine-placeholder {
+select, #engine-placeholder {
     text-align: center;
 }
 
@@ -65,6 +103,10 @@ img[src="./assets/x.svg"] {
 
 #engine-add-button {
     margin-bottom: 0;
+}
+
+.engine-number {
+    text-align: center;
 }
 
 .engine-url {
@@ -113,7 +155,7 @@ img[src="./assets/x.svg"] {
     
     border-style: solid;
     border-width: 2px;
-    border-color: var(--main-accent-bg-color);
+    border-color: var(--main-bg-accent-color);
 }
 
 #inf-box h2 {
