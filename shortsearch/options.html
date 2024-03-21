@@ -78,6 +78,8 @@
                         <option value="off">None</option>
                         <option value="strict">Strict</option>
                         <option value="loose">Generous</option>
+                        <!--TODO <option value="custom">Custom</option> -->
+                        <!--TODO Add custom engine with regex input using a textarea-->
                     </select>
                     <img class="inf-btn" id="inf-eval-mode" src="assets/info_icon.svg" alt="Info icon button" tabindex="0">
                 </div>
@@ -96,13 +98,33 @@
                 <div id="inf-null-txt">Null: Could not load this info (This is a bug)</div>
                 <div class="display-none" id="inf-engine-placeholder-txt">
                     <h2>Placeholder in URL</h2>
-                    TODO: Add info (engine-placeholder)<br>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci vel fugit laborum quas, officiis tenetur laudantium ea porro eaque, magnam temporibus ipsum a omnis delectus exercitationem dolore vitae aperiam. Consequuntur.
+                    <div id="inf-box-warning-txt">
+                        Warning: Do not shange this, unless you know what you are doing!
+                    </div>
+                    <div id="inf-box-main-txt">
+                        The placeholder will be replaced by your search term in each URL. 
+                        To make it work, you must include the placeholder in every URL in the settings.
+                    </div>
+                    <div id="inf-box-example-txt">
+                        For example: <code>https://google.com/search?q=<b>%s</b></code> would require <b>%s</b> as a placeholder.
+                    </div>
                 </div>
                 <div class="display-none" id="inf-eval-mode-txt">
                     <h2>Link auto evaluation Engine</h2>
-                    TODO: Add info (eval-mode)<br>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, illo ab! Nulla tenetur incidunt blanditiis dolorum a! Officia, repellat excepturi itaque libero, consequuntur praesentium voluptatem nostrum rem eaque ea similique.
+                    <div id="inf-box-main-txt">
+                        The selected text is evaluated using the selected link evaluation engine. 
+                        If a link is found, it is opened. Otherwise, it is searched as plain text with your search engine. 
+                    </div>
+                    <div id="inf-box-example-txt">
+                        For example:
+                        <ul>
+                            <li>None: No evaluation is performed and everything is searched.</li>
+                            <li>Strict: Links like <code>https://redh.dev</code> are evaluated but those like <code>://redh.dev</code>, <code>//redh.dev</code>, and <code>redh.dev</code> are not.</li>
+                            <li>Generous: All of <code>https://redh.dev</code>, <code>://redh.dev</code>, <code>//redh.dev</code>, and <code>redh.dev</code> are evaluated.</li>
+                            <li>Custom: You can add your own custom regex to define your own link evaluation.</li>
+                        </ul>
+                        Note that IPv4 addresses (like <code>https://192.168.1.1</code>) are considered valid "domains", while IPv6 addresses are not yet supported.
+                    </div>
                 </div>
                 <button id="inf-box-close-btn">Close</button>
             </div>
