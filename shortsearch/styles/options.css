@@ -52,6 +52,7 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+    color: var(--main-txt-link-color);
 }
 
 .fter-links {

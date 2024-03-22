@@ -219,6 +219,10 @@ function closeInfoBox() {
     }, {once: true});
 }
 
+function toggleDarkMode(darkMode = true) {
+    document.getElementsByTagName("html")[0].setAttribute("dark", darkMode);
+}
+
 addEventListener("DOMContentLoaded", () => {
     loadSettings(DEFAULT_SETTINGS).then(displaySettings);
     populateDatalist(document.getElementById("engines-name-list"), Object.keys(ENGINES_DATALIST));
@@ -288,10 +292,8 @@ addEventListener("DOMContentLoaded", () => {
     });
 
     const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    if (prefersColorScheme.matches) {
-        document.getElementsByTagName("html")[0].setAttribute("dark", prefersColorScheme.matches);
-    }
+    toggleDarkMode(prefersColorScheme.matches);
     prefersColorScheme.addEventListener('change', event => {
-        document.getElementsByTagName("html")[0].setAttribute("dark", event.matches);
+        toggleDarkMode(event.matches);
     });
 });
