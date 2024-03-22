@@ -1,5 +1,5 @@
 /* This has to be defined in every page after this */
-:root {
+html {
     --main-bg1-color: #000;
     --main-bg2-color: #000;
     --main-bg-accent-color: #fff;

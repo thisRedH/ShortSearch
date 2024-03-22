@@ -286,4 +286,12 @@ addEventListener("DOMContentLoaded", () => {
         if (e.button === 1)
             goToShortcuts(false);
     });
+
+    const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (prefersColorScheme.matches) {
+        document.getElementsByTagName("html")[0].setAttribute("dark", prefersColorScheme.matches);
+    }
+    prefersColorScheme.addEventListener('change', event => {
+        document.getElementsByTagName("html")[0].setAttribute("dark", event.matches);
+    });
 });
