@@ -219,8 +219,12 @@ function closeInfoBox() {
     }, {once: true});
 }
 
-function toggleDarkMode(darkMode = true) {
-    document.getElementsByTagName("html")[0].setAttribute("data-theme", darkMode ? "dark" : "light");
+function changeColorScheme(scheme = "dark") {
+    document.getElementsByTagName("html")[0].setAttribute("data-theme", scheme);
+}
+function toggleColorScheme() {
+    const currentScheme = document.getElementsByTagName("html")[0].getAttribute("data-theme");
+    changeColorScheme(currentScheme === "dark" ? "light" : "dark");
 }
 
 addEventListener("DOMContentLoaded", () => {
@@ -291,9 +295,13 @@ addEventListener("DOMContentLoaded", () => {
             goToShortcuts(false);
     });
 
+    document.getElementById("theme-toggle-btn").addEventListener("click", (e) => {
+        toggleColorScheme();
+    });
+
     const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    toggleDarkMode(prefersColorScheme.matches);
+    changeColorScheme(prefersColorScheme.matches ? "dark" : "light");
     prefersColorScheme.addEventListener('change', event => {
-        toggleDarkMode(event.matches);
+        changeColorScheme(event.matches ? "dark" : "light");
     });
 });
