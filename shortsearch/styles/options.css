@@ -14,7 +14,7 @@ html {
     --main-txt-accent-color: #444;
 }
 
-html[dark="true"] {
+html[data-theme="dark"] {
     --main-bg1-color: #000;
     --main-bg2-color: #222;
     --main-bg-accent-color: #555;

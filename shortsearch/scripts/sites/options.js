@@ -220,7 +220,7 @@ function closeInfoBox() {
 }
 
 function toggleDarkMode(darkMode = true) {
-    document.getElementsByTagName("html")[0].setAttribute("dark", darkMode);
+    document.getElementsByTagName("html")[0].setAttribute("data-theme", darkMode ? "dark" : "light");
 }
 
 addEventListener("DOMContentLoaded", () => {
