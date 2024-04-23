@@ -7,13 +7,14 @@ html {
     --main-txt-sup-color: #555;
     --main-txt-link-color: #00f;
     --main-txt-accent-color: #000;
+    --main-accent-filter: invert(0%);
     --main-fnt-fam: sans-serif;
     --main-fnt-fam-accent: sans-serif;
 }
 
 * {
     color: var(--main-txt-color);
-    font-size: 1rem;
+    font-size: 1.01rem;
     font-style: normal;
     font-family: var(--main-fnt-fam);
 
@@ -46,7 +47,7 @@ td {
 }
 
 footer, footer *{
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--main-txt-sup-color);
 }
 
@@ -73,4 +74,8 @@ button:hover, input[type="button"]:hover,
 input[type="submit"]:hover, input[type="reset"]:hover {
     box-shadow: 0 2px 5px #000;
     scale: 1.04;
+}
+
+.svg-img-btn {
+    filter: var(--main-accent-filter);
 }

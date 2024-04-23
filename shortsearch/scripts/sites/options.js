@@ -26,9 +26,9 @@ function addSearchEngine(name = "", url = "") {
         <td class="engine-number"><span>${count +1}</span>.</td>
         <td class="engine-name"><input name="${IDT_ENGINE_NAME}${count}" id="${IDT_ENGINE_NAME}${count}" list="engines-name-list" value="${name}"></td>
         <td class="engine-url"><input name="${IDT_ENGINE_URL}${count}" id="${IDT_ENGINE_URL}${count}" list="engines-url-list" value="${url}"></td>
-        <td class="engine-remove"><a href="javascript:void(0)" name="${IDT_ENGINE_REMOVE}${count}" id="${IDT_ENGINE_REMOVE}${count}"><img src="./assets/x.svg" alt="X Remove Button"></a></td>
-        <td class="engine-move-up"><a href="javascript:void(0)" name="${IDT_ENGINE_MOVE_UP}${count}" id="${IDT_ENGINE_MOVE_UP}${count}"><img src="./assets/arrow_up.svg" alt="Move Up Button"></a></td>
-        <td class="engine-move-down"><a href="javascript:void(0)" name="${IDT_ENGINE_MOVE_DOWN}${count}" id="${IDT_ENGINE_MOVE_DOWN}${count}"><img src="./assets/arrow_down.svg" alt="Move Down Button"></a></td>
+        <td class="engine-remove"><a href="javascript:void(0)" name="${IDT_ENGINE_REMOVE}${count}" id="${IDT_ENGINE_REMOVE}${count}"><img class="svg-img-btn" src="./assets/x.svg" alt="X Remove Button"></a></td>
+        <td class="engine-move-up"><a href="javascript:void(0)" name="${IDT_ENGINE_MOVE_UP}${count}" id="${IDT_ENGINE_MOVE_UP}${count}"><img class="svg-img-btn" src="./assets/arrow_up.svg" alt="Move Up Button"></a></td>
+        <td class="engine-move-down"><a href="javascript:void(0)" name="${IDT_ENGINE_MOVE_DOWN}${count}" id="${IDT_ENGINE_MOVE_DOWN}${count}"><img class="svg-img-btn" src="./assets/arrow_down.svg" alt="Move Down Button"></a></td>
     `;
 
     container.appendChild(newEngine);

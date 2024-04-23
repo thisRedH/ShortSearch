@@ -5,13 +5,14 @@
 }
 
 html {
-    --main-bg1-color: #AAA;
-    --main-bg2-color: #FFF;
-    --main-bg-accent-color: #CCC;
-    --main-txt-color: #000;
-    --main-txt-sup-color: gray;
-    --main-txt-link-color: #6161FF;
-    --main-txt-accent-color: #444;
+    --main-bg1-color: #fff;
+    --main-bg2-color: #f0f0f0;
+    --main-bg-accent-color: #ddd;
+    --main-txt-color: #333;
+    --main-txt-sup-color: #666;
+    --main-txt-link-color: #007bff;
+    --main-txt-accent-color: #333;
+    --main-accent-filter: brightness(0) saturate(100%) invert(14%) sepia(0%) saturate(0%) hue-rotate(44deg) brightness(103%) contrast(85%);;
 }
 
 html[data-theme="dark"] {
@@ -22,6 +23,7 @@ html[data-theme="dark"] {
     --main-txt-sup-color: rgb(74, 73, 73);
     --main-txt-link-color: #6161FF;
     --main-txt-accent-color: whitesmoke;    
+    --main-accent-filter: brightness(0) saturate(100%) invert(100%) sepia(1%) saturate(394%) hue-rotate(250deg) brightness(116%) contrast(92%);
 }
 
 
@@ -74,7 +76,7 @@ footer a:hover {
 
 .info-text, .info-text * {
     text-align: center;
-    font-size: 0.78rem;
+    font-size: 0.8rem;
 
     margin-top: 8px;
     margin-bottom: 8px;
@@ -85,10 +87,6 @@ footer a:hover {
     position: absolute;
     right: 0;
     top: 0;
-}
-
-#theme-toggle-dark {
-    filter: invert(1);
 }
 
 html:not([data-theme="dark"]) #theme-toggle-dark {
@@ -143,12 +141,6 @@ select, #engine-placeholder {
     text-align: center;
 }
 
-img[src="./assets/arrow_up.svg"],
-img[src="./assets/arrow_down.svg"],
-img[src="./assets/x.svg"] {
-    filter: invert(1);
-}
-
 #engine-add-button {
     margin-bottom: 0;
 }
@@ -169,7 +161,6 @@ img[src="./assets/x.svg"] {
 
 .inf-btn {
     cursor: pointer;
-    filter: invert(1);
 }
 
 #inf-box-bckrnd {
