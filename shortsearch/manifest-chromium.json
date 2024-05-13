@@ -1,13 +1,16 @@
 {
     "name": "ShortSearch",
     "description": "Select text, press Shortcut, see the search results. Easy!",
-    "version": "0.9.1",
+    "version": "0.9.5",
+    "manifest_version": 3,
+    "options_page": "options.html",
     "icons": {
         "16": "assets/icon16.png",
         "32": "assets/icon32.png",
         "48": "assets/icon48.png",
         "128": "assets/icon128.png"
     },
+
     "permissions": [
         "tabs",
         "activeTab",
@@ -18,7 +21,7 @@
         "*://*/*",
         "file:///*"
     ],
-    "options_page": "options.html",
+
     "content_scripts": [
         {
             "js": [
@@ -35,6 +38,7 @@
     "background": {
         "service_worker": "scripts/background/service_worker.js"
     },
+
     "commands": {
         "search_selected_txt_0": {
             "suggested_key": {
@@ -74,6 +78,5 @@
         "search_selected_txt_9": {
             "description": "Search with Engine 10"
         }
-    },
-    "manifest_version": 3
+    }
 }

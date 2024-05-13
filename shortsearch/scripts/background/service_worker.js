@@ -20,6 +20,12 @@ if (command.startsWith("search_selected_txt")) {
             engine = {"name": "Google", "url": "http://google.com/search?q=%s"};
         }
 
+        if (typeof tab === 'undefined') {
+            tab = (await chrome.tabs.query({ currentWindow: true, active: true }))[0];
+        }
+
+        console.log(tab.url);
+
         await chrome.tabs.sendMessage(tab.id, {
             event: "search_sel",
             engineURL: engine.url,
