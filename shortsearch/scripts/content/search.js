@@ -1,3 +1,4 @@
+console.log("ShortSearch: Content Script loaded");
 
 function normalizeURL(url) {
     const pattern = /^((([a-z]*):)?\/{2})?|\/{2}/i;

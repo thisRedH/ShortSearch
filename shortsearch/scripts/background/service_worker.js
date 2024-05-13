@@ -1,6 +1,6 @@
-
-importScripts("../common/misc.js");
-importScripts("../common/data.js");
+if (typeof importScripts !== 'undefined') {
+    importScripts("../common/misc.js", "../common/data.js");
+}
 
 chrome.commands.onCommand.addListener(async (command, tab) => {
 if (command.startsWith("search_selected_txt")) {

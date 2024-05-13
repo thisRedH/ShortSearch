@@ -9,43 +9,38 @@
         "128": "assets/icon128.png"
     },
     "permissions": [
+        "scripting",
         "tabs",
         "activeTab",
         "contextMenus",
         "storage"
     ],
-    "host_permissions": [
-        "*://*/*",
-        "file:///*"
-    ],
+    "host_permissions": ["<all_urls>"],
     "options_page": "options.html",
     "content_scripts": [
         {
             "js": [
                 "scripts/content/search.js"
             ],
-            "matches": [
-                "*://*/*",
-                "file:///*"
-            ],
+            "matches": ["<all_urls>"],
             "all_frames": true
         }
     ],
     "background": {
-        "service_worker": "scripts/background/service_worker.js"
+        "page": "background.html"
     },
     "commands": {
         "search_selected_txt_0": {
             "suggested_key": {
-                "default": "Ctrl+Shift+S",
-                "mac": "Command+Shift+S"
+                "default": "Ctrl+Alt+S",
+                "mac": "Command+Alt+S"
             },
             "description": "Search with Engine 1"
         },
         "search_selected_txt_1": {
             "suggested_key": {
-                "default": "Ctrl+Shift+Y",
-                "mac": "Command+Shift+Y"
+                "default": "Ctrl+Alt+Y",
+                "mac": "Command+Alt+Y"
             },
             "description": "Search with Engine 2"
         },
@@ -74,5 +69,10 @@
             "description": "Search with Engine 10"
         }
     },
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "foo@example.dev"
+        }
+    },      
     "manifest_version": 3
 }

@@ -1,0 +1,79 @@
+{
+    "name": "ShortSearch",
+    "description": "Select text, press Shortcut, see the search results. Easy!",
+    "version": "0.9.1",
+    "icons": {
+        "16": "assets/icon16.png",
+        "32": "assets/icon32.png",
+        "48": "assets/icon48.png",
+        "128": "assets/icon128.png"
+    },
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "contextMenus",
+        "storage"
+    ],
+    "host_permissions": [
+        "*://*/*",
+        "file:///*"
+    ],
+    "options_page": "options.html",
+    "content_scripts": [
+        {
+            "js": [
+                "scripts/content/search.js"
+            ],
+            "matches": [
+                "*://*/*",
+                "file:///*"
+            ],
+            "all_frames": true,
+            "match_about_blank": true
+        }
+    ],
+    "background": {
+        "service_worker": "scripts/background/service_worker.js"
+    },
+    "commands": {
+        "search_selected_txt_0": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+S",
+                "mac": "Command+Shift+S"
+            },
+            "description": "Search with Engine 1"
+        },
+        "search_selected_txt_1": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+Y",
+                "mac": "Command+Shift+Y"
+            },
+            "description": "Search with Engine 2"
+        },
+        "search_selected_txt_2": {
+            "description": "Search with Engine 3"
+        },
+        "search_selected_txt_3": {
+            "description": "Search with Engine 4"
+        },
+        "search_selected_txt_4": {
+            "description": "Search with Engine 5"
+        },
+        "search_selected_txt_5": {
+            "description": "Search with Engine 6"
+        },
+        "search_selected_txt_6": {
+            "description": "Search with Engine 7"
+        },
+        "search_selected_txt_7": {
+            "description": "Search with Engine 8"
+        },
+        "search_selected_txt_8": {
+            "description": "Search with Engine 9"
+        },
+        "search_selected_txt_9": {
+            "description": "Search with Engine 10"
+        }
+    },
+    "manifest_version": 3
+}
