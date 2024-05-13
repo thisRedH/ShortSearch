@@ -7,7 +7,7 @@ const LAST_NUMBER = /(\d+)(?!.*\d)/
  * @param {String} andFiller String to set before the last item (e.g. and, und, et, ...)
  * @returns {String} Formatted String
  */
-function beautifyArray(arr, andFiller = "and") {
+function arrayToStringAndFiller(arr, andFiller = "and") {
     if (arr.length === 0) {
         return "";
     } else if (arr.length === 1) {

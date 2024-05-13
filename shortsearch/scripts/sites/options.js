@@ -169,14 +169,14 @@ async function saveSettingsForm() {
     if (enginesEmpty.length) {
         var msg = `Search Engine ${enginesEmpty} dosn't have an URL.\nIt will not work!`;
         if (enginesEmpty.length > 1)
-            var msg = `Search Engine's ${beautifyArray(enginesEmpty)} don't have a URL.\nThey will not work!`;
+            var msg = `Search Engine's ${arrayToStringAndFiller(enginesEmpty)} don't have a URL.\nThey will not work!`;
 
         showError(msg);
     }
     if (enginesNoSpecial.length) {
         var msg = `Search Engine ${enginesNoSpecial} dosn't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nIt will not work as expected!`
         if (enginesNoSpecial.length > 1)
-            var msg = `Search Engine's ${beautifyArray(enginesNoSpecial)} don't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nThey will not work as expected!`;
+            var msg = `Search Engine's ${arrayToStringAndFiller(enginesNoSpecial)} don't have a Placehoder (${SPECIAL_QUERY_PLACEHOLDER}) in the URL.\nThey will not work as expected!`;
 
         showError(msg);
     }
