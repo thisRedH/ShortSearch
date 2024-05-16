@@ -1,5 +1,9 @@
-if (typeof importScripts !== 'undefined') {
-    importScripts("../common/misc.js", "../common/data.js");
+if (typeof document === "undefined") { // is a backround page and not a service worker
+    try {
+        importScripts("../common/misc.js", "../common/data.js");
+    } catch(e) {
+        console.err(e);
+    }
 }
 
 chrome.commands.onCommand.addListener(async (command, tab) => {
