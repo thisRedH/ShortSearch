@@ -7,18 +7,26 @@ function normalizeURL(url) {
 
 // from https://stackoverflow.com/a/5717133/22279121
 // changed to fit my needs
-const VALIDATE_URL = new RegExp(
-    '^(((https|http|ftp|file)?:)?\\/\\/)?'+ // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+const VALIDATE_URL_SOFT = new RegExp(
+    '^((?:(https|http|ftp|file)?:)?\/\/)?'+ // protocol
+    '((?:([a-z\\d](?:[a-z\\d-]*[a-z\\d])*)\\.)+([a-z]{2,})|'+ // domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))' // OR ip (v4) address
 );
 
 // Same as VALIDATE_URL, but protocol detection is enforced
 const VALIDATE_URL_STRICT = new RegExp(
     '^((https|http|ftp|file):\/\/)'+ // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((?:([a-z\\d](?:[a-z\\d-]*[a-z\\d])*)\\.)+([a-z]{2,})|'+ // domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))' // OR ip (v4) address
 );
+
+function isValidUrl(url, validatePattern = VALIDATE_URL_STRICT) {
+    const found = url.match(validatePattern);
+    return (
+        !!found &&
+        globalThis.EXT_SHORTSEARCH_VALID_TLDS.indexOf(found[5]) > -1
+    );
+}
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 if (message.event === "search_sel") {
@@ -27,10 +35,10 @@ if (message.event === "search_sel") {
 
     //TODO: add off
     const urlPattern = message.evalMode === "loose"
-        ? VALIDATE_URL
+        ? VALIDATE_URL_SOFT
         : VALIDATE_URL_STRICT;
 
-    if (!!message.evalMode && urlPattern.test(selectedText)) {
+    if (!!message.evalMode && isValidUrl(selectedText, urlPattern)) {
         // selectedText is a url, now open it
         window.open(
             normalizeURL(selectedText),
