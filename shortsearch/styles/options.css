@@ -70,11 +70,11 @@ footer a:hover {
     margin-left: 0;
 }
 
-.info-text {
+.info-text, .info-text > span {
     color: var(--main-txt-sup-color);
 }
 
-.info-text, .info-text * {
+.info-text, .info-text > span, .info-text * {
     text-align: center;
     font-size: 0.8rem;
 

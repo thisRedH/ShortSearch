@@ -76,6 +76,17 @@ input[type="submit"]:hover, input[type="reset"]:hover {
     scale: 1.04;
 }
 
+html[browser="none"] .chromium-only,
+html[browser="none"] .firefox-only {
+    display: none;
+}
+html[browser="firefox"] .chromium-only {
+    display: none;
+}
+html[browser="chromium"] .firefox-only {
+    display: none;
+}
+
 .svg-img-btn {
     filter: var(--main-accent-filter);
 }

@@ -219,6 +219,17 @@ function closeInfoBox() {
     }, {once: true});
 }
 
+function defineBrowser() {
+    const url = chrome.runtime.getURL("");
+    if (url.startsWith("chrome-")) {
+        document.getElementsByTagName("html")[0].setAttribute("browser", "chromium");
+    } else if (url.startsWith("moz-")) {
+        document.getElementsByTagName("html")[0].setAttribute("browser", "firefox");
+    } else {
+        document.getElementsByTagName("html")[0].setAttribute("browser", "none");
+    }
+}
+
 function changeColorScheme(scheme = "dark") {
     document.getElementsByTagName("html")[0].setAttribute("data-theme", scheme);
 }
@@ -228,6 +239,8 @@ function toggleColorScheme() {
 }
 
 addEventListener("DOMContentLoaded", () => {
+    defineBrowser();
+
     loadSettings(DEFAULT_SETTINGS).then(displaySettings);
     populateDatalist(document.getElementById("engines-name-list"), Object.keys(ENGINES_DATALIST));
     populateDatalist(document.getElementById("engines-url-list"), Object.values(ENGINES_DATALIST));

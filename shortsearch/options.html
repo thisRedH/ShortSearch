@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" browser="none">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,10 +48,15 @@
                 <datalist id="engines-url-list"></datalist>
             </div>
 
-            <p class="info-text">
-                To set shortcut's please visit
-                <a id="open-chrome-shortcuts" tabindex="0">chrome://extensions/shortcuts</a>
-                <!--redirect happens in script!-->
+            <p id="info-open-shortcuts" class="info-text">
+                <span class="chromium-only">
+                    To set shortcut's please visit
+                    <a id="open-chrome-shortcuts" tabindex="0">chrome://extensions/shortcuts</a>
+                    <!--redirect happens in script!-->
+                </span>
+                <span class="firefox-only">
+                    Go to <a href="https://support.mozilla.org/en-US/kb/manage-extension-shortcuts-firefox">support.mozilla.org</a> to get help setting up shortcut's.
+                </span>
             </p>
 
             <div class="justify-space-between align-center">
