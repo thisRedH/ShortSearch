@@ -23,12 +23,7 @@ platform =  args.platform
 rootDir =   f"{os.getcwd()}"
 srcDir =    f"{rootDir}/shortsearch"
 cacheDir =  f"{rootDir}/build/cache/{platform}"
-outDir =    f"{rootDir}/build/{platform}"
-
-#TODO: add chromium support
-if platform == "chromium":
-    print("Chromium not yet supported")
-    sys.exit(0)
+outDir =    f"{rootDir}/build"
 
 os.makedirs(cacheDir, exist_ok=True)
 os.makedirs(outDir, exist_ok=True)
@@ -42,8 +37,8 @@ shutil.copytree(
     dirs_exist_ok=True
 )
 
-removeSilent(f"{outDir}/shortsearch.zip")
-shutil.make_archive(f"{outDir}/shortsearch", "zip", cacheDir)
+removeSilent(f"{outDir}/shortsearch_{platform}.zip")
+shutil.make_archive(f"{outDir}/shortsearch_{platform}", "zip", cacheDir)
 
 if args.clean:
     removeSilent(cacheDir)
