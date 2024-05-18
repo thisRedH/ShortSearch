@@ -5,19 +5,22 @@ function normalizeURL(url) {
     return "http://" + url.replace(pattern, "");
 }
 
+const DOMAIN_PATTERN_STR = "((?:([\\p{L}\\d](?:[\\p{L}\\d-]*[\\p{L}\\d])*)\\.)+([\\p{L}]{2,})|";
+const IPV4_PATTERN_STR = "((\\d{1,3}\\.){3}\\d{1,3}))";
+
 // from https://stackoverflow.com/a/5717133/22279121
 // changed to fit my needs
 const VALIDATE_URL_SOFT = new RegExp(
-    '^((?:(https|http|ftp|file)?:)?\/\/)?'+ // protocol
-    '((?:([a-z\\d](?:[a-z\\d-]*[a-z\\d])*)\\.)+([a-z]{2,})|'+ // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))' // OR ip (v4) address
+    '^((?:(https|http|ftp|file)?:)?//)?'+ // protocol
+    DOMAIN_PATTERN_STR + IPV4_PATTERN_STR,
+    'u'
 );
 
 // Same as VALIDATE_URL, but protocol detection is enforced
 const VALIDATE_URL_STRICT = new RegExp(
-    '^((https|http|ftp|file):\/\/)'+ // protocol
-    '((?:([a-z\\d](?:[a-z\\d-]*[a-z\\d])*)\\.)+([a-z]{2,})|'+ // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))' // OR ip (v4) address
+    '^((https|http|ftp|file)://)'+ // protocol
+    DOMAIN_PATTERN_STR + IPV4_PATTERN_STR,
+    'u'
 );
 
 function isValidUrl(url, validatePattern = VALIDATE_URL_STRICT) {
