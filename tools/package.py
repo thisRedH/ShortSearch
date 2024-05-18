@@ -28,9 +28,17 @@ outDir =    f"{rootDir}/build"
 os.makedirs(cacheDir, exist_ok=True)
 os.makedirs(outDir, exist_ok=True)
 
-shutil.copy(f"{rootDir}/LICENSE", f"{cacheDir}/LICENSE")
-shutil.copy(f"{srcDir}/manifest-{platform}.json", f"{cacheDir}/manifest.json")
+with open(f"{rootDir}/VERSION", "r", encoding="utf-8") as f:
+    version = f.readline().strip()
 
+with open(f"{srcDir}/manifest-{platform}.json", "r", encoding="utf-8") as f:
+    manifest = f.read()
+
+with open(f"{cacheDir}/manifest.json", "w", encoding="utf-8") as f:
+    manifest = manifest.replace("{{VERSION}}", version)
+    f.write(manifest)
+
+shutil.copy(f"{rootDir}/LICENSE", f"{cacheDir}/LICENSE")
 shutil.copytree(
     srcDir, cacheDir, True,
     ignore=shutil.ignore_patterns("manifest*", "build"),
