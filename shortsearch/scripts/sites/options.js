@@ -231,11 +231,23 @@ function defineBrowser() {
 }
 
 function changeColorScheme(scheme = "dark") {
+    localStorage.setItem("color-scheme", scheme);
     document.getElementsByTagName("html")[0].setAttribute("data-theme", scheme);
 }
 function toggleColorScheme() {
     const currentScheme = document.getElementsByTagName("html")[0].getAttribute("data-theme");
-    changeColorScheme(currentScheme === "dark" ? "light" : "dark");
+    changeColorScheme(currentScheme === "light" ? "dark" : "light");
+}
+function initColorScheme() {
+    const prefersColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    let colorScheme = localStorage.getItem("color-scheme");
+    if (!colorScheme)
+        colorScheme = prefersColorScheme.matches ? "dark" : "light";
+
+    changeColorScheme(colorScheme);
+    prefersColorScheme.addEventListener("change", e => {
+        changeColorScheme(e.matches ? "dark" : "light");
+    });
 }
 
 addEventListener("DOMContentLoaded", () => {
@@ -312,9 +324,5 @@ addEventListener("DOMContentLoaded", () => {
         toggleColorScheme();
     });
 
-    const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    changeColorScheme(prefersColorScheme.matches ? "dark" : "light");
-    prefersColorScheme.addEventListener('change', event => {
-        changeColorScheme(event.matches ? "dark" : "light");
-    });
+    initColorScheme();
 });
