@@ -12,7 +12,6 @@ const ENGINES_DATALIST = {
     "Ask.com":      "http://ask.com/web?q=%s",
     "AOL Search":   "http://search.aol.com/aol/search?q=%s",
     "Excite":       "http://results.excite.com/serp?q=%s",
-    "All the Internet":     "http://alltheinternet.com/?q=%s",
     "Lycos":        "http://search.lycos.com/web/?q=%s",
     "Dogpile":      "http://dogpile.com/search/web?q=%s",
     "Swisscows":    "http://swisscows.com/web?query=%s",
@@ -20,6 +19,7 @@ const ENGINES_DATALIST = {
     "Naver":        "http://search.naver.com/search.naver?query=%s",
     "Seznam":       "http://search.seznam.cz/?q=%s",
     "Qwant":        "http://qwant.com/?q=%s",
+    "All the Internet":         "http://alltheinternet.com/?q=%s",
 
     // Encyclopedia
     "Wikipedia":    "http://wikipedia.org/wiki/%s",
@@ -45,22 +45,24 @@ const ENGINES_DATALIST = {
     "ebay":         "http://ebay.com/sch/i.html?_nkw=%s",
     "Walmart":      "http://walmart.com/search?q=%s",
     "Newegg":       "http://newegg.com/p/pl?d=%s",
-    "Facebook Marketplace": "http://facebook.com/marketplace/search/?query=%s",
+    "Facebook Marketplace":     "http://facebook.com/marketplace/search/?query=%s",
 
     // PC/Coding Stuff
-    "Stack Overflow":   "http://stackoverflow.com/search?q=%s",
-    "Stack Exchange":   "http://stackexchange.com/search?q=%s",
     "DevDocs":      "http://devdocs.io/#q=%s",
     "Github":       "http://github.com/search?q=%s",
     "PCPartPicker": "http://pcpartpicker.com/search/?q=%s",
     "Geizhals":     "http://geizhals.de/?fs=%s",
+    "Stack Overflow":           "http://stackoverflow.com/search?q=%s",
+    "Stack Exchange":           "http://stackexchange.com/search?q=%s",
 
     // Game Stuff
     "Steam":        "http://steampowered.com/search/?term=%s",
     "GOG":          "http://gog.com/games?query=%s",
 
-    // Special
-    "The Pirate Bay":   "http://thepiratebay10.org/search/%s",
+    // Other
+    "The Pirate Bay":           "http://thepiratebay10.org/search/%s",
+    "Wayback Machine":          "https://web.archive.org/web/*/%s",
+    "Internet Archive":         "https://archive.org/search?query=%s",
 }
 
 const DEFAULT_SETTINGS = {
