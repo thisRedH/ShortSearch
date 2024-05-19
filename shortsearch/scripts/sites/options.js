@@ -9,6 +9,8 @@ const IDT_ENGINE_REMOVE = "engine-remove-";
 const IDT_ENGINE_MOVE_UP = "engine-move-up-";
 const IDT_ENGINE_MOVE_DOWN = "engine-move-down-";
 
+// SearchEngine
+
 function addSearchEngine(name = "", url = "") {
     const maxCount = 10;
     const container = document.getElementById("engines-container");
@@ -109,6 +111,8 @@ function reorderSearchEngins() {
     }
 }
 
+// SettingsForm
+
 async function saveSettingsForm() {
     let formData = new FormData(document.getElementById("settings-form"));
 
@@ -198,6 +202,8 @@ function displaySettings(settings) {
     document.getElementById("eval-mode").value = settings.evalMode;
 }
 
+// InfoBox
+
 function openInfoBox(infoId) {
     document.getElementById("inf-box-wrapper").classList.remove("display-none");
     document.getElementById(infoId).classList.remove("display-none");
@@ -230,14 +236,18 @@ function defineBrowser() {
     }
 }
 
+// ColorScheme
+
 function changeColorScheme(scheme = "dark") {
     localStorage.setItem("color-scheme", scheme);
     document.getElementsByTagName("html")[0].setAttribute("data-theme", scheme);
 }
+
 function toggleColorScheme() {
     const currentScheme = document.getElementsByTagName("html")[0].getAttribute("data-theme");
     changeColorScheme(currentScheme === "light" ? "dark" : "light");
 }
+
 function initColorScheme() {
     const prefersColorScheme = window.matchMedia("(prefers-color-scheme: dark)");
     let colorScheme = localStorage.getItem("color-scheme");
@@ -248,17 +258,13 @@ function initColorScheme() {
     prefersColorScheme.addEventListener("change", e => {
         changeColorScheme(e.matches ? "dark" : "light");
     });
+
+    document.getElementById("theme-toggle-btn").addEventListener("click", (e) => {
+        toggleColorScheme();
+    });
 }
 
-addEventListener("DOMContentLoaded", () => {
-    defineBrowser();
-
-    loadSettings(DEFAULT_SETTINGS).then(displaySettings);
-    populateDatalist(document.getElementById("engines-name-list"), Object.keys(ENGINES_DATALIST));
-    populateDatalist(document.getElementById("engines-url-list"), Object.values(ENGINES_DATALIST));
-
-    document.getElementById("engine-add-button").addEventListener("click", e => {addSearchEngine()});
-
+function initInfoBoxes() {
     document.getElementById("inf-box-close-btn").addEventListener("click", e => {closeInfoBox()});
     document.getElementById("inf-box-bckrnd").addEventListener("click", e => {closeInfoBox()});
     document.getElementById("inf-box").addEventListener("click", e => {e.stopPropagation()});
@@ -274,16 +280,39 @@ addEventListener("DOMContentLoaded", () => {
             openInfoBox(infBtn.id + "-txt");
         });
     })
+}
 
-    document.getElementById("settings-form").addEventListener("submit", async (e) => {
+function initFormSearchEngineList() {
+    loadSettings(DEFAULT_SETTINGS).then(displaySettings);
+    populateDatalist(document.getElementById("engines-name-list"), Object.keys(ENGINES_DATALIST));
+    populateDatalist(document.getElementById("engines-url-list"), Object.values(ENGINES_DATALIST));
+
+    document.getElementById("engine-add-button").addEventListener("click", e => {addSearchEngine()});
+}
+
+function initForm() {
+    initFormSearchEngineList();
+
+    document.getElementById("settings-form").addEventListener("submit", (e) => {
         e.preventDefault();
         saveSettingsForm();
     });
-
-    document.getElementById("settings-form").addEventListener("reset", async (e) => {
+    document.getElementById("settings-form").addEventListener("reset", (e) => {
         e.preventDefault();
         resetSettings();
     })
+}
+
+function initSite() {
+    defineBrowser();
+    initColorScheme();
+    initInfoBoxes();
+    initForm();
+}
+
+
+addEventListener("DOMContentLoaded", () => {
+    initSite();
 
     function goToShortcuts(active = true) {
         chrome.tabs.getCurrent(tab => {
@@ -319,10 +348,4 @@ addEventListener("DOMContentLoaded", () => {
         if (e.button === 1)
             goToShortcuts(false);
     });
-
-    document.getElementById("theme-toggle-btn").addEventListener("click", (e) => {
-        toggleColorScheme();
-    });
-
-    initColorScheme();
 });
