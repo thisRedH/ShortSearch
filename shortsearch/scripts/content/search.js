@@ -7,7 +7,7 @@ function normalizeURL(url) {
 
 const DOMAIN_PATTERN_STR = "(?:([\\p{L}\\d](?:[\\p{L}\\d-]*[\\p{L}\\d])*)\\.)+([\\p{L}]{2,})";
 // from https://stackoverflow.com/a/36760050/22279121
-const IPV4_PATTERN_STR = "^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$";
+const IPV4_PATTERN_STR = "((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\.?\\b){4}";
 
 // from https://stackoverflow.com/a/5717133/22279121
 // changed to fit my needs
@@ -26,9 +26,13 @@ const VALIDATE_URL_STRICT = new RegExp(
 
 function isValidUrl(url, validatePattern = VALIDATE_URL_STRICT) {
     const found = url.match(validatePattern);
+
     return (
-        !!found &&
-        globalThis.EXT_SHORTSEARCH_VALID_TLDS.indexOf(found[5]) > -1
+        !!found && (
+            !!found[6] /* valid ipv4 */ ||
+            (globalThis.EXT_SHORTSEARCH_VALID_TLDS
+                .indexOf(found[5]) > -1)
+        )
     );
 }
 
