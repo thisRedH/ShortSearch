@@ -9,9 +9,15 @@ const IDT_ENGINE_REMOVE = "engine-remove-";
 const IDT_ENGINE_MOVE_UP = "engine-move-up-";
 const IDT_ENGINE_MOVE_DOWN = "engine-move-down-";
 
-// SearchEngine
+function changedForm() {
+    window.onbeforeunload = () => {return true;};
+}
+
+// SettingsForm SearchEngine
 
 function addSearchEngine(name = "", url = "") {
+    changedForm();
+
     const maxCount = 10;
     const container = document.getElementById("engines-container");
     const count = container.childElementCount;
@@ -69,6 +75,8 @@ function addSearchEngine(name = "", url = "") {
 }
 
 function removeSearchEngine(id) {
+    changedForm();
+
     if (document.getElementById("engines-container").childElementCount <= 1) {
         showError("You Need at least 1 engine!");
         return;
@@ -83,6 +91,8 @@ function removeSearchEngine(id) {
 }
 
 function moveUpSearchEngine(id) {
+    changedForm();
+
     const engine = document.getElementById(id);
 
     if(engine.previousElementSibling)
@@ -92,6 +102,8 @@ function moveUpSearchEngine(id) {
 }
 
 function moveDownSearchEngine(id) {
+    changedForm();
+
     const engine = document.getElementById(id);
 
     if(engine.nextElementSibling)
@@ -101,6 +113,8 @@ function moveDownSearchEngine(id) {
 }
 
 function reorderSearchEngins() {
+    changedForm();
+
     const container = document.getElementById("engines-container");
     const children = container.children;
 
@@ -114,6 +128,8 @@ function reorderSearchEngins() {
 // SettingsForm
 
 async function saveSettingsForm() {
+    window.onbeforeunload = null;
+
     let formData = new FormData(document.getElementById("settings-form"));
 
     let optEnginesList = [];
@@ -293,6 +309,9 @@ function initFormSearchEngineList() {
 function initForm() {
     initFormSearchEngineList();
 
+    document.getElementById("settings-form").addEventListener("input", (e) => {
+        changedForm();
+    });
     document.getElementById("settings-form").addEventListener("submit", (e) => {
         e.preventDefault();
         saveSettingsForm();
