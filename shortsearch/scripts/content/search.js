@@ -5,7 +5,7 @@ function normalizeURL(url) {
     return "http://" + url.replace(pattern, "");
 }
 
-const DOMAIN_PATTERN_STR = "((?:([\\p{L}\\d](?:[\\p{L}\\d-]*[\\p{L}\\d])*)\\.)+([\\p{L}]{2,})|";
+const DOMAIN_PATTERN_STR = "(?:([\\p{L}\\d](?:[\\p{L}\\d-]*[\\p{L}\\d])*)\\.)+([\\p{L}]{2,})";
 // from https://stackoverflow.com/a/36760050/22279121
 const IPV4_PATTERN_STR = "^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$";
 
@@ -13,14 +13,14 @@ const IPV4_PATTERN_STR = "^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$";
 // changed to fit my needs
 const VALIDATE_URL_SOFT = new RegExp(
     '^((?:(https|http|ftp|file)?:)?//)?'+ // protocol
-    DOMAIN_PATTERN_STR + IPV4_PATTERN_STR,
+    '('+ DOMAIN_PATTERN_STR +'|'+ IPV4_PATTERN_STR +')',
     'u'
 );
 
 // Same as VALIDATE_URL, but protocol detection is enforced
 const VALIDATE_URL_STRICT = new RegExp(
     '^((https|http|ftp|file)://)'+ // protocol
-    DOMAIN_PATTERN_STR + IPV4_PATTERN_STR,
+    '('+ DOMAIN_PATTERN_STR +'|'+ IPV4_PATTERN_STR +')',
     'u'
 );
 
@@ -32,9 +32,29 @@ function isValidUrl(url, validatePattern = VALIDATE_URL_STRICT) {
     );
 }
 
+function getSelectionText() {
+    const activeElement = document.activeElement;
+    let selectedText = "";
+
+    if (activeElement.tagName === "TEXTAREA" || activeElement.tagName === "INPUT") {
+        selectedText = activeElement.value.toString().substring(
+            activeElement.selectionStart, 
+            activeElement.selectionEnd
+        );
+
+        // Fallback for input types not supporting selectionStart/selectionEnd
+        if (selectedText.trim() === "" && !!activeElement.value)
+            selectedText = activeElement.value;
+    } else {
+        selectedText = window.getSelection().toString();
+    }
+
+    return selectedText.trim();
+}
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 if (message.event === "search_sel") {
-    const selectedText = window.getSelection().toString().trim();
+    const selectedText = getSelectionText();
     if (!selectedText) { return; }
 
     //TODO: add off
