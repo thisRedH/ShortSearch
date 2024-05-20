@@ -6,7 +6,8 @@ function normalizeURL(url) {
 }
 
 const DOMAIN_PATTERN_STR = "((?:([\\p{L}\\d](?:[\\p{L}\\d-]*[\\p{L}\\d])*)\\.)+([\\p{L}]{2,})|";
-const IPV4_PATTERN_STR = "((\\d{1,3}\\.){3}\\d{1,3}))";
+// from https://stackoverflow.com/a/36760050/22279121
+const IPV4_PATTERN_STR = "^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$";
 
 // from https://stackoverflow.com/a/5717133/22279121
 // changed to fit my needs
