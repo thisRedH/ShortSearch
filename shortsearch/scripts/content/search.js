@@ -1,40 +1,50 @@
 console.log("ShortSearch: Content Script loaded");
 
-function normalizeURL(url) {
-    const pattern = /^((([a-z]*):)?\/{2})?|\/{2}/i;
-    return "http://" + url.replace(pattern, "");
-}
-
-const DOMAIN_PATTERN_STR = "(?:([\\p{L}\\d](?:[\\p{L}\\d-]*[\\p{L}\\d])*)\\.)+([\\p{L}]{2,})";
+const VALID_TLDS = globalThis.EXT_SHORTSEARCH_VALID_TLDS;
+// based on https://stackoverflow.com/a/5717133/22279121
+const DOMAIN_PATTERN = /(?:([\p{L}\d](?:[\p{L}\d-]*[\p{L}\d])*)\.)+([\p{L}]{2,})/u;
 // from https://stackoverflow.com/a/36760050/22279121
-const IPV4_PATTERN_STR = "((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\.?\\b){4}";
-//TODO: ipv6 https://regex101.com/r/rB9pG1/1
+const IPV4_PATTERN = /(?:(?:25[0-5]|(?:2[0-4]|1\d|[1-9]|)\d)\.?\b){4}/;
+//FIXME: ipv6 https://regex101.com/r/rB9pG1/1
+const IPV6_PATTERN = /(?:)/;
 
-// from https://stackoverflow.com/a/5717133/22279121
-// changed to fit my needs
 const VALIDATE_URL_SOFT = new RegExp(
     '^((?:(https|http|ftp|file)?:)?//)?'+ // protocol
-    '('+ DOMAIN_PATTERN_STR +'|'+ IPV4_PATTERN_STR +')',
+    '(('+ DOMAIN_PATTERN.source +
+    ')|('+ IPV4_PATTERN.source +
+    ')|('+ IPV6_PATTERN.source +'))',
     'u'
 );
 
 // Same as VALIDATE_URL, but protocol detection is enforced
 const VALIDATE_URL_STRICT = new RegExp(
     '^((https|http|ftp|file)://)'+ // protocol
-    '('+ DOMAIN_PATTERN_STR +'|'+ IPV4_PATTERN_STR +')',
+    '(('+ DOMAIN_PATTERN.source +
+    ')|('+ IPV4_PATTERN.source +
+    ')|('+ IPV6_PATTERN.source +'))',
     'u'
 );
 
 function isValidUrl(url, validatePattern = VALIDATE_URL_STRICT) {
     const found = url.match(validatePattern);
+    if (!found) {return false;}
+
+    const protocol = found[2];
+    const domain = found[4];
+    const tld = found[6];
+    const ipv4 = found[7];
+    const ipv6 = found[8];
 
     return (
-        !!found && (
-            !!found[6] /* valid ipv4 */ ||
-            (globalThis.EXT_SHORTSEARCH_VALID_TLDS
-                .indexOf(found[5]) > -1)
-        )
+        (ipv6) ||
+        (ipv4) ||
+        (domain && VALID_TLDS.indexOf(tld) > -1)
     );
+}
+
+function normalizeURL(url, protocol = "http://") {
+    const pattern = /^((([a-z]*):)?\/{2})?|\/{2}/i;
+    return protocol + url.replace(pattern, "");
 }
 
 function getSelectionText() {
