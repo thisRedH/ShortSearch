@@ -80,7 +80,8 @@
 
     "browser_specific_settings": {
         "gecko": {
-            "id": "redh@reh.dev"
+            "id": "redh@reh.dev",
+            "strict_min_version": "79.0"
         }
     }
 }

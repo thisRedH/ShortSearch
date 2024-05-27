@@ -6,7 +6,11 @@ if (typeof document === "undefined") { // is a backround page and not a service 
     }
 }
 
-chrome.commands.onCommand.addListener(async (command, tab) => {
+if (!(globalThis.browser && globalThis.browser.runtime && globalThis.browser.runtime.id)) {
+    globalThis.browser = globalThis.chrome;
+}
+
+browser.commands.onCommand.addListener(async (command, tab) => {
 if (command.startsWith("search_selected_txt")) {
     // Send message to content script
     try {
@@ -24,13 +28,13 @@ if (command.startsWith("search_selected_txt")) {
             engine = {"name": "Google", "url": "http://google.com/search?q=%s"};
         }
 
-        if (typeof tab === 'undefined') {
+        if (typeof tab === "undefined") {
             tab = (await browser.tabs.query({
                 currentWindow: true, active: true
             }))[0];
         }
 
-        await chrome.tabs.sendMessage(tab.id, {
+        await browser.tabs.sendMessage(tab.id, {
             event: "search_sel",
             engineURL: engine.url,
             windowTarget: settings.windowTarget,

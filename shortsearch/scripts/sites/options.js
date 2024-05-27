@@ -1,4 +1,8 @@
 
+if (!(globalThis.browser && globalThis.browser.runtime && globalThis.browser.runtime.id)) {
+    globalThis.browser = globalThis.chrome;
+}
+
 var SPECIAL_QUERY_PLACEHOLDER = "%s";
 
 // ID Templates
@@ -242,7 +246,7 @@ function closeInfoBox() {
 }
 
 function defineBrowser() {
-    const url = chrome.runtime.getURL("");
+    const url = browser.runtime.getURL("");
     if (url.startsWith("chrome-")) {
         document.getElementsByTagName("html")[0].setAttribute("browser", "chromium");
     } else if (url.startsWith("moz-")) {
@@ -334,8 +338,8 @@ addEventListener("DOMContentLoaded", () => {
     initSite();
 
     function goToShortcuts(active = true) {
-        chrome.tabs.getCurrent(tab => {
-            chrome.tabs.create({
+        browser.tabs.getCurrent(tab => {
+            browser.tabs.create({
                 url: "chrome://extensions/shortcuts",
                 active: active,
                 index: tab.index +1
@@ -343,7 +347,7 @@ addEventListener("DOMContentLoaded", () => {
                 // Use Groupes if available
                 if (tab.groupId >= 0) {
                     console.log(tab.groupId);
-                    chrome.tabs.group({
+                    browser.tabs.group({
                         tabIds: [tabNew.id],
                         groupId: tab.groupId}
                     );

@@ -1,5 +1,9 @@
 console.log("ShortSearch: Content Script loaded");
 
+if (!(globalThis.browser && globalThis.browser.runtime && globalThis.browser.runtime.id)) {
+    globalThis.browser = globalThis.chrome;
+}
+
 const VALID_TLDS = globalThis.EXT_SHORTSEARCH_VALID_TLDS;
 // based on https://stackoverflow.com/a/5717133/22279121
 const DOMAIN_PATTERN = /(?:([\p{L}\d](?:[\p{L}\d-]*[\p{L}\d])*)\.)+([\p{L}]{2,})/u;
@@ -67,7 +71,7 @@ function getSelectionText() {
     return selectedText.trim();
 }
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
 if (message.event === "search_sel") {
     const selectedText = getSelectionText();
     if (!selectedText) { return; }
