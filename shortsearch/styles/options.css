@@ -4,29 +4,6 @@
     --main-fnt-fam-accent: sans-serif;
 }
 
-html {
-    --main-bg1-color: #fff;
-    --main-bg2-color: #f0f0f0;
-    --main-bg-accent-color: #ddd;
-    --main-txt-color: #333;
-    --main-txt-sup-color: #666;
-    --main-txt-link-color: #007bff;
-    --main-txt-accent-color: #333;
-    --main-accent-filter: brightness(0) saturate(100%) invert(14%) sepia(0%) saturate(0%) hue-rotate(44deg) brightness(103%) contrast(85%);;
-}
-
-html[data-theme="dark"] {
-    --main-bg1-color: #000;
-    --main-bg2-color: #222;
-    --main-bg-accent-color: #555;
-    --main-txt-color: whitesmoke;
-    --main-txt-sup-color: rgb(74, 73, 73);
-    --main-txt-link-color: #6161FF;
-    --main-txt-accent-color: whitesmoke;    
-    --main-accent-filter: brightness(0) saturate(100%) invert(100%) sepia(1%) saturate(394%) hue-rotate(250deg) brightness(116%) contrast(92%);
-}
-
-
 body {
     display: block;
     min-width: fit-content;
@@ -97,27 +74,12 @@ html:not([data-theme="light"]) #theme-toggle-light {
     display: none;
 }
 
-#settings-card {
-    display: flex;
-    justify-content: center;
-
-    margin: 0 25px;
-    background-color: var(--main-bg2-color);
-    border-radius: 25px;
-    padding: 20px;
-
-    border-style: solid;
-    border-width: 2px;
-    border-color: var(--main-bg-accent-color);
-}
-
 #settings-form {
     width: 100%;
     position: relative;
 }
 
 #settings-form h1 {
-    font-size: 1.55rem;
     text-align: center;
 }
 
